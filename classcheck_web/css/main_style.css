@@ -1,0 +1,124 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+header {
+    width: 100%;
+    height: 80px;
+    background-color: #13454e;
+    font-size: 40px;
+    color: #a6eaf5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main {
+    height: 100%;
+    width: 100%;
+    margin-top: 80px;
+    background-color: #060f14;
+    color: #a6eaf5;
+    display: flex;
+}
+.section_title{
+    font-size: 30px;
+    border: #a6eaf5 solid 3px;
+    border-style: outset ;
+    padding: 14px;
+}
+.buttons_list{
+    margin-left: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#left {
+    width: 180px;
+    min-height: calc(100vh - 70px); 
+    background-color: #215a5250;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    padding-top: 10px;
+}
+#user_info {
+    margin-top: 50px;
+    margin-left: 200px; 
+    padding: 20px;
+    width: 300px;
+    background-color: #060f14;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+footer {
+    width: 100%;
+    height: 40px;
+    background-color: #13454e;
+    text-align: center;
+    padding-top: 10px;
+    color: #a6eaf5;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+.pfp {
+    margin: 25px;
+    border: 2px black solid;
+    width: 200px;
+    height: 200px;
+    background: #fff;
+}
+button{
+    background: #04ad94;
+    color: rgb(22, 35, 34);
+    cursor: pointer;
+    font-size: 16px;
+    transition: font-size 0.3s ease-in-out;
+}
+.buttons-content {
+    margin: 20px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.button-content {
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 10px;
+    width: 400px;
+}
+.chpass_button{
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+}
+.menu {
+    padding: 4.5px;
+    margin: 10px;
+}
+.button-menu {
+    padding: 12px 50px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+button:hover {
+    font-size: 22px;
+}
+.horario {
+    border: 2px black solid;
+}
+.p_instrucciones{
+    font-size: 18px;
+    margin: 18px;
+}

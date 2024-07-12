@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Formulario de Registro</h1>
+    <form id="registrationForm">
+        <label>
+            <input type="radio" name="role" value="student" onclick="toggleForm('studentForm')"> Estudiante
+        </label>
+        <label>
+            <input type="radio" name="role" value="teacher" onclick="toggleForm('teacherForm')"> Maestro
+        </label>
+        <label>
+            <input type="radio" name="role" value="admin" onclick="toggleForm('adminForm')"> Administrador
+        </label>
+
+        <!-- Formulario para Estudiante -->
+        <div id="studentForm" class="hidden">
+            <h2>Formulario para Estudiante</h2>
+            <div>
+                <label for="matricula">Matrícula (nombre de usuario):</label>
+                <input type="text" id="matricula" name="matricula" required>
+            </div>
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div>
+                <label for="apellidoPaterno">Apellido Paterno:</label>
+                <input type="text" id="apellidoPaterno" name="apellidoPaterno" required>
+            </div>
+            <div>
+                <label for="unidadAcademica">Unidad Académica:</label>
+                <input type="text" id="unidadAcademica" name="unidadAcademica" required>
+            </div>
+            <div>
+                <label for="carrera">Carrera:</label>
+                <input type="text" id="carrera" name="carrera" required>
+            </div>
+            <div>
+                <label for="grado">Grado:</label>
+                <input type="text" id="grado" name="grado" required>
+            </div>
+            <div>
+                <label for="grupo">Grupo:</label>
+                <input type="text" id="grupo" name="grupo" required>
+            </div>
+            <button type="submit">Enviar</button>
+        </div>
+
+        <!-- Formulario para Maestro -->
+        <div id="teacherForm" class="hidden">
+            <h2>Formulario para Maestro</h2>
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div>
+                <label for="apellidoPaterno">Apellido Materno:</label>
+                <input type="text" id="ApellidoMaterno" name="ApellidoMaterno" required>
+            </div>
+            <div>
+                <label for="apellidoPaterno">Apellido Paterno:</label>
+                <input type="text" id="apellidoPaterno" name="apellidoPaterno" required>
+            </div>
+            <div>
+                <label for="unidadAcademica">Unidad Académica:</label>
+                <input type="text" id="unidadAcademica" name="unidadAcademica" required>
+            </div>
+            <button type="submit">Enviar</button>
+        </div>
+
+        <!-- Formulario para Administrador -->
+        <div id="adminForm" class="hidden">
+            <h2>Formulario para Administrador</h2>
+            <div>
+                <label for="Nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div>
+                <label for="Apellido materno">Apellido Materno</label>
+                <input type="text" id="ApellidoMaterno" name="ApellidoMaterno" required>
+            </div>
+            <div>
+                <label for="Apellido Paterno">Apellido Paterno</label>
+                <input type="text" id="ApellidoPaterno" name="ApellidoPaterno" required>
+            </div>
+            <div>
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            <div>
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" required>
+            </div>
+            <div>
+                <label for="confirmarContraseña">Confirmar Contraseña:</label>
+                <input type="password" id="confirmarContraseña" name="confirmarContraseña" required>
+            </div>
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+
+    <script>
+        function toggleForm(formId) {
+            // Ocultar todos los formularios
+            document.getElementById('studentForm').classList.add('hidden');
+            document.getElementById('teacherForm').classList.add('hidden');
+            document.getElementById('adminForm').classList.add('hidden');
+
+            // Mostrar el formulario seleccionado
+            document.getElementById(formId).classList.remove('hidden');
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Registro exitoso');
+        });
+    </script>
+
+</body>
+</html>
