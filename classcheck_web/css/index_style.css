@@ -66,7 +66,7 @@ button{
     transition: font-size 0.5s ease-in-out;
 }
 button:hover {
-    color: #fff;
+    color: white;
 }
 
 span {

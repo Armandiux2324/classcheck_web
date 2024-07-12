@@ -113,7 +113,7 @@ button{
     border-radius: 5px;
 }
 button:hover {
-    font-size: 22px;
+    color: white;
 }
 .horario {
     border: 2px black solid;
@@ -121,4 +121,53 @@ button:hover {
 .p_instrucciones{
     font-size: 18px;
     margin: 18px;
+}
+.hidden {
+    display: none;
+}
+.observation-label {
+    background-color: white;
+    color: black;
+    padding: 30px;
+    margin-top: 5px;
+    border-radius: 3px;
+    text-align: center;
+    width: 100%;
+}
+/*Calendario*/
+.calendar-container {
+    margin: 50px auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    max-width: 800px;
+    background-color: rgb(36, 107, 123);
+    border-radius: 10px;
+}
+.calendar-table {
+    width: 100%;
+}
+.calendar-table th, .calendar-table td {
+    border: 1px solid #343b3e;
+    padding: 10px;
+    text-align: center;
+}
+.calendar-table th {
+    background-color: #060f14;
+    color: #a6eaf5;
+}
+/*Materias - Grupos*/
+.materia {
+    margin: 20px 0;
+}
+.materia-button {
+    background: #666;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+}
+.grupo-container {
+    display: none;
+    margin-top: 10px;
 }
