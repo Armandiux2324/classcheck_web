@@ -6,6 +6,7 @@
     <title>ClassCheck</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main_style.css">
+    <script src="/scripts/main_script.js"></script>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -27,28 +28,40 @@
                 </div>
             </div>
         </div>
-        <div>
-            <div>
-                <button class="button-content" onclick="toggleLabel(this)"><strong>Fecha observación</strong></button>
-                <label class="hidden observation-label">Observación</label>
+        <div class="content">
+            <div class="buttons_list">
+                <h3 class="section_title">Consultar listas de grupos</h3>
+                <p class="p_instrucciones">Despliegue el nombre de la materia para ver los grupos</p>
+                <div class="materia">
+                    <button class="materia-button" onclick="toggleGrupos('grupo1')">Materia 1 ▼</button>
+                    <div id="grupo1" class="grupo-container">
+                        <button class="button-content"><strong>Grupo A</strong></button><br>
+                        <button class="button-content">Grupo B</button>
+                    </div>
+                </div>
+                <div class="materia">
+                    <button class="materia-button" onclick="toggleGrupos('grupo2')">Materia 2 ▼</button>
+                    <div id="grupo2" class="grupo-container">
+                        <button class="button-content">Grupo A</button><br>
+                        <button class="button-content">Grupo B</button>
+                    </div>
+                </div>
+                <div class="materia">
+                    <button class="materia-button" onclick="toggleGrupos('grupo3')">Materia 3 ▼</button>
+                    <div id="grupo3" class="grupo-container">
+                        <button class="button-content">Grupo A</button><br>
+                        <button class="button-content">Grupo B</button>
+                    </div>
+                </div>
+                <div class="materia">
+                    <button class="materia-button" onclick="toggleGrupos('grupoX')">Materia X ▼</button>
+                    <div id="grupoX" class="grupo-container">
+                        <button class="button-content">Grupo A</button><br>
+                        <button class="button-content">Grupo B</button><br><br>
+                    </div>
+                </div>
             </div>
-            <div>
-                <button class="button-content" onclick="toggleLabel(this)"><strong>Fecha observación</strong></button>
-                <label class="hidden observation-label">Observación</label>
-            </div>
-            <div>
-                <button class="button-content" onclick="toggleLabel(this)"><strong>Fecha observación</strong></button>
-                <label class="hidden observation-label">Observación</label>
-            </div>
-            <div>
-                <button class="button-content" onclick="toggleLabel(this)"><strong>Fecha observación</strong></button>
-                <label class="hidden observation-label">Observación</label>
-            </div>
-            <div>
-                <button class="button-content" onclick="toggleLabel(this)"><strong>Fecha observación</strong></button>
-                <label class="hidden observation-label">Observación</label><br><br>
-            </div><br><br>            
-            </div>
+        </div>
     </main>
     <footer>&copy; 2024 ClassCheck</footer>
 </body>
