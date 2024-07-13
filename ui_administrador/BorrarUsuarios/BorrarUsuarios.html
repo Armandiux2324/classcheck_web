@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassCheck - Borrar Usuario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index_style.css">
+</head>
+<body>
+    <div class="login-container">
+        <header>ClassCheck</header>     
+        <h2>Para confirmar su identidad, ingrese su contraseña</h2>
+        <form action="borrar_usuario.php" method="POST">
+            <input type="password" class="login-input" name="password" placeholder="Contraseña" required>
+            <input type="password" class="login-input" name="confirm_password" placeholder="Confirmar Contraseña" required>
+            <button type="submit" class="login-button">Confirmar</button>
+        </form>
+    </div>
+    <footer>&copy; 2024 ClassCheck</footer>
+</body>
+</html>

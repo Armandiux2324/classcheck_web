@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassCheck - Sign In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main_style.css">
+    <script src="/scripts/main_script.js"></script>
+</head>
+<body>
+    <header>ClassCheck</header>
+    <main>
+        <div id="left">
+            <div class="menu">
+                <button class="button-menu"><strong>Inicio</strong></button>
+            </div>
+        </div>
+        <div id="user_info">
+            <div class="perfil">
+                <div>
+                    <div class="pfp"></div>
+                    <h3>Nombre:</h3>
+                    <p>xxxxxx</p><br>
+                    <h3>ID Estudiante:</h3>
+                    <p>xx</p><br>
+                </div>
+            </div>
+        </div>
+        <div class="login-container">     
+            <br><h1>Modificar Usuario</h1>
+            <form id="registrationForm">
+                <!-- Formulario para Estudiante -->
+                <div id="studentForm">
+                    <h2>Estudiante</h2>
+                    <div>
+                        <label for="matricula">Matrícula (nombre de usuario):</label><br>
+                        <input type="text" id="matricula" class="campo-form" required>
+                    </div>
+                    <div>
+                        <label for="nombre_estudiante">Nombre:</label><br>
+                        <input type="text" id="nombre_estudiante" class="campo-form" required>
+                    </div>
+                    <div>
+                        <label for="APaterno_estudiante">Apellido Paterno:</label><br>
+                        <input type="text" id="APaterno_estudiante" class="campo-form" required>
+                    </div>
+                    <div>
+                        <label for="AMaterno_estudiante">Apellido Materno:</label><br>
+                        <input type="text" id="AMaterno_estudiante" class="campo-form" required>
+                    </div>
+                    <div>
+                        <label for="contraseña_estudiante">Contraseña:</label><br>
+                        <input type="password" id="contraseña_estudiante" class="campo-form" required>
+                    </div>
+                    <div>
+                        <label for="unidadAcademica_estudiante">Unidad Académica:</label><br>
+                        <input type="text" id="unidadAcademica_estudiante" class="campo-form" list="unidadesAcademicas" required>
+                        <datalist id="unidadesAcademicas">
+                            <option value="UTZAC">
+                            <option value="UTZAC campus pinos">
+                        </datalist>
+                    </div>
+                    <div>
+                        <label for="carrera">Carrera:</label><br>
+                        <input type="text" id="carrera" class="campo-form" list="carreraopcion" required>
+                        <datalist id="carreraopcion">
+                            <option value="Desarrollo de software">
+                            <option value="Mineria">
+                            <option value="Fisioterapia">
+                        </datalist>
+                    </div>
+                    <div>
+                        <label for="grado">Grado:</label><br>
+                        <input type="text" id="grado" class="campo-form" list="gradoopcion" required>
+                        <datalist id="gradoopcion">
+                            <option value="3">
+                            <option value="5">
+                        </datalist>
+                    </div>
+                    <div>
+                        <label for="grupo">Grupo:</label><br>
+                        <input type="text" id="grupo" class="campo-form" list="grupoopcion" required>
+                        <datalist id="grupoopcion">
+                            <option value="A">
+                            <option value="B">
+                        </datalist>
+                    </div>
+                    <button type="submit" class="button-content">Guardar Cambios</button><br>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>&copy; 2024 ClassCheck</footer>
+</body>
+</html>
