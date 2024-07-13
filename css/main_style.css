@@ -1,0 +1,198 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    background-color: #060f14;
+}
+header {
+    width: 100%;
+    height: 80px;
+    background-color: #13454e;
+    font-size: 40px;
+    color: #a6eaf5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main {
+    height: auto;
+    width: 100%;
+    margin-top: 80px;
+    background-color: #060f14;
+    color: #a6eaf5;
+    display: flex;
+}
+.section_title{
+    font-size: 30px;
+    border: #a6eaf5 solid 3px;
+    border-style: outset ;
+    padding: 14px;
+}
+.buttons_list{
+    margin-left: 100px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#left {
+    width: 180px;
+    min-height: calc(100vh - 70px); 
+    background-color: #215a5250;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    padding-top: 10px;
+}
+#user_info {
+    margin-top: 50px;
+    margin-left: 200px; 
+    padding: 20px;
+    width: 300px;
+    background-color: #060f14;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+footer {
+    width: 100%;
+    height: 40px;
+    background-color: #13454e;
+    text-align: center;
+    padding-top: 10px;
+    color: #a6eaf5;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+.pfp {
+    margin: 25px;
+    border: 2px black solid;
+    width: 200px;
+    height: 200px;
+    background: #fff;
+}
+button{
+    background: #04ad94;
+    color: rgb(22, 35, 34);
+    cursor: pointer;
+    font-size: 16px;
+    transition: font-size 0.3s ease-in-out;
+}
+.buttons-content {
+    margin: 20px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.button-content {
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 10px;
+    width: 400px;
+}
+.chpass_button{
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+}
+.menu {
+    padding: 4.5px;
+    margin: 10px;
+}
+.button-menu {
+    padding: 12px 50px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+button:hover {
+    color: white;
+}
+.horario {
+    border: 2px black solid;
+}
+.p_instrucciones{
+    font-size: 18px;
+    margin: 18px;
+}
+.hidden {
+    display: none;
+}
+.observation-label {
+    background-color: white;
+    color: black;
+    padding: 30px;
+    margin-top: 5px;
+    border-radius: 3px;
+    text-align: center;
+    width: 100%;
+}
+.campo-form{
+    border-radius: 5px;
+    width: 70%;
+    height: 30px;
+    margin: 10px;
+}
+.hora-qr{
+    border-radius: 5px;
+    width: 70%;
+    height: 30px;
+    margin: 10px;
+   text-align: center;
+}
+.qr{
+    background-color: white;
+    margin-left: 200px;
+    margin-right: 105px;
+    
+}
+
+/*Calendario*/
+.calendar-container {
+    margin: 50px auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    max-width: 800px;
+    background-color: rgb(36, 107, 123);
+    border-radius: 10px;
+}
+.calendar-table {
+    width: 100%;
+}
+.calendar-table th, .calendar-table td {
+    border: 1px solid #343b3e;
+    padding: 10px;
+    text-align: center;
+}
+.calendar-table th {
+    background-color: #060f14;
+    color: #a6eaf5;
+}
+/*Materias - Grupos*/
+.materia {
+    margin: 20px 0;
+}
+.materia-button {
+    background: #666;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    border-radius: 5px;
+}
+.materia-button:hover{
+    color: #060f14;
+}
+.grupo-container {
+    display: none;
+    margin-top: 10px;
+}
