@@ -65,19 +65,36 @@
                 </div>
                 <div>
                     <label for="unidadAcademica_estudiante">Unidad Académica:</label><br>
-                    <input type="text" id="unidadAcademica_estudiante" class="campo-form" required>
+                    <input type="text" id="unidadAcademica_estudiante" class="campo-form" list="unidadesAcademicas" required>
+                    <datalist id="unidadesAcademicas">
+                        <option value="UTZAC">
+                        <option value="UTZAC campus pinos">
+                    </datalist>
                 </div>
                 <div>
                     <label for="carrera">Carrera:</label><br>
-                    <input type="text" id="carrera" class="campo-form" required>
+                    <input type="text" id="carrera" class="campo-form" list="carreraopcion" required>
+                    <datalist id="carreraopcion">
+                        <option value="Desarrollo de software">
+                        <option value="Mineria">
+                        <option value="Fisioterapia">
+                    </datalist>
                 </div>
                 <div>
                     <label for="grado">Grado:</label><br>
-                    <input type="text" id="grado" class="campo-form" required>
+                    <input type="text" id="grado" class="campo-form" list="gradoopcion" required>
+                    <datalist id="gradoopcion">
+                        <option value="3">
+                        <option value="5">
+                    </datalist>
                 </div>
                 <div>
                     <label for="grupo">Grupo:</label><br>
-                    <input type="text" id="grupo" class="campo-form" required>
+                    <input type="text" id="grupo" class="campo-form" list="grupoopcion" required>
+                    <datalist id="grupoopcion">
+                        <option value="A">
+                        <option value="B">
+                    </datalist>
                 </div>
                 <button type="submit" class="button-content">Enviar</button><br>
             </div>
@@ -103,7 +120,11 @@
                 </div>
                 <div>
                     <label for="unidadAcademica_maestro">Unidad Académica:</label><br>
-                    <input type="text" id="unidadAcademica_maestro" class="campo-form" required>
+                    <input type="text" id="unidadAcademica_maestro" class="campo-form" list="unidacadmaestro" required>
+                    <datalist id="unidacadmaestro">
+                        <option value="UTZAC">
+                        <option value="UTZAC campus Pinos">
+                    </datalist>
                 </div>
                 <button type="submit" class="button-content">Enviar</button><br>
             </div>
