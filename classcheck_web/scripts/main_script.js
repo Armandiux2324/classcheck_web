@@ -14,3 +14,17 @@ function toggleGrupos(id) {
         container.style.display = "none";
     }
 }
+function toggleForm(formId) {
+    // Ocultar todos los formularios
+    document.getElementById('studentForm').classList.add('hidden');
+    document.getElementById('teacherForm').classList.add('hidden');
+    document.getElementById('adminForm').classList.add('hidden');
+
+    // Mostrar el formulario seleccionado
+    document.getElementById(formId).classList.remove('hidden');
+}
+
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('Registro exitoso');
+});

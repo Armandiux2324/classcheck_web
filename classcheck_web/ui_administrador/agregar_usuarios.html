@@ -6,7 +6,7 @@
     <title>ClassCheck - Sign In</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main_style.css">
-    <script src="/scripts/index_script.js"></script>
+    <script src="/scripts/main_script.js"></script>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -136,22 +136,6 @@
         </form>  
     </div>  
     </main>
-    <script>
-        function toggleForm(formId) {
-            // Ocultar todos los formularios
-            document.getElementById('studentForm').classList.add('hidden');
-            document.getElementById('teacherForm').classList.add('hidden');
-            document.getElementById('adminForm').classList.add('hidden');
-
-            // Mostrar el formulario seleccionado
-            document.getElementById(formId).classList.remove('hidden');
-        }
-
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Registro exitoso');
-        });
-    </script>
     <footer>&copy; 2024 ClassCheck</footer>
 </body>
 </html>
