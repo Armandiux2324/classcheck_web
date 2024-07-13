@@ -7,15 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/index_style.css">
     <script src="/scripts/index_script.js"></script>
+    <script src="/scripts/main_script.js"></script>
+    <script src="/scripts/maestro_script.js"></script>
 </head>
 <body>
     <div class="login-container">
         <header>ClassCheck</header>
         <h2>Cambiar contraseña</h2>
-        <form action="conexionDB.php" method="POST">
+        <form method="POST" onsubmit="passChanged(event)">
             <p>Nueva contraseña:</p>
             <input type="password" class="login-input" id="password" placeholder="Contraseña" required>
-            <p>confrima tu nueva contraseña:</p>
+            <p>Confirma tu nueva contraseña:</p>
             <input type="password" class="login-input" id="conf_password" placeholder="Confirmar Contraseña" required>
             <button type="submit" class="login-button"><strong>Confirmar</strong></button>
         </form>

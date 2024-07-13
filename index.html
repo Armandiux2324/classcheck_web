@@ -12,11 +12,11 @@
     <div class="login-container">
         <header>ClassCheck</header>     
         <h2>Iniciar sesión</h2>
-        <form action="conexionDB.php" method="POST">
-            <input type="text" class="login-input" placeholder="Nombre de usuario" required>
+        <form id="loginForm" onsubmit="redirectToPage(event)" method="POST">
+            <input type="text" class="login-input" id="username" placeholder="Nombre de usuario" required>
             <input type="password" class="login-input" id="password" placeholder="Contraseña" required>
             <span onclick="togglePasswordVisibility()">Mostrar contraseña</span>
-            <button type="submit" class="login-button"><strong>Iniciar Sesión</strong></button>
+            <button type="submit" class="login-button" ><strong>Iniciar Sesión</strong></button>
         </form>
     </div>
     <footer>&copy; 2024 ClassCheck</footer>

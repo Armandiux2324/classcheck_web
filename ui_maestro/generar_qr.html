@@ -13,18 +13,19 @@
     <main>
         <div id="left">
             <div class="menu">
-                <button class="button-menu"><strong>Inicio</strong></button>
+                <button class="button-menu" onclick="redirectToMain(event)"><strong>Inicio</strong></button>
             </div>
         </div>
         <div id="user_info">
             <div class="perfil">
                 <div>
+                    <h1>Perfil de usuario</h1>
                     <div class="pfp"></div>
                     <h3>Nombre:</h3>
                     <p>xxxxxx</p><br>
                     <h3>Unidad académica:</h3>
                     <p>xxxxxxx</p><br>
-                    <button class="chpass_button"><strong>Modificar contraseña</strong></button>
+                    <button class="chpass_button" id="modif_pass" onclick="redirectToConfPass(event)"><strong>Modificar contraseña</strong></button>
                 </div>
             </div>
         </div>
