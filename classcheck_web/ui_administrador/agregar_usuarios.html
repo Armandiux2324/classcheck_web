@@ -5,19 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClassCheck - Sign In</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/index_style.css">
+    <link rel="stylesheet" href="/css/main_style.css">
     <script src="/scripts/index_script.js"></script>
 </head>
 <body>
-    <div class="login-container">
-        <header>ClassCheck</header>     
-        <h2>Seleccionar Rol</h2>
-        <form action="conexionDB.php" method="POST">
-            <button type="submit" class="login-button"><strong>Agregar usuarios</strong></button>
-            <button type="submit" class="login-button"><strong>Modificar usuarios</strong></button>
-            <button type="submit" class="login-button"><strong>Borrar usuarios</strong></button>
-        </form>
-    </div>
+    <header>ClassCheck</header>
+    <main>
+        <div id="left">
+            <div class="menu">
+                <button class="button-menu"><strong>Inicio</strong></button>
+            </div>
+        </div>
+        <div id="user_info">
+            <div class="perfil">
+                <div>
+                    <div class="pfp"></div>
+                    <h3>Nombre:</h3>
+                    <p>xxxxxx</p><br>
+                    <h3>ID Administrador:</h3>
+                    <p>xx</p><br>
+                </div>
+            </div>
+        </div>
+        <div class="login-container">     
+            <br><h1>Formulario de Registro</h1>
+        <form id="registrationForm">
+            <label>
+                <input type="radio" name="role" value="student" onclick="toggleForm('studentForm')"> Estudiante
+            </label>
+            <label>
+                <input type="radio" name="role" value="teacher" onclick="toggleForm('teacherForm')"> Maestro
+            </label>
+            <label>
+                <input type="radio" name="role" value="admin" onclick="toggleForm('adminForm')"> Administrador
+            </label>
+    
+            <!-- Formulario para Estudiante -->
+            <div id="studentForm" class="hidden">
+                <h2>Formulario para Estudiante</h2>
+                <div>
+                    <label for="matricula">Matrícula (nombre de usuario):</label><br>
+                    <input type="text" id="matricula" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="nombre_estudiante">Nombre:</label><br>
+                    <input type="text" id="nombre_estudiante" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="APaterno_estudiante">Apellido Paterno:</label><br>
+                    <input type="text" id="APaterno_estudiante" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="AMaterno_estudiante">Apellido Paterno:</label><br>
+                    <input type="text" id="AMaterno_estudiante" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="contraseña_estudiante">Contraseña:</label><br>
+                    <input type="password" id="contraseña_estudiante" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="unidadAcademica_estudiante">Unidad Académica:</label><br>
+                    <input type="text" id="unidadAcademica_estudiante" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="carrera">Carrera:</label><br>
+                    <input type="text" id="carrera" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="grado">Grado:</label><br>
+                    <input type="text" id="grado" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="grupo">Grupo:</label><br>
+                    <input type="text" id="grupo" class="campo-form" required>
+                </div>
+                <button type="submit" class="button-content">Enviar</button><br>
+            </div>
+    
+            <!-- Formulario para Maestro -->
+            <div id="teacherForm" class="hidden">
+                <h2>Formulario para Maestro</h2>
+                <div>
+                    <label for="nombre_maestro">Nombre:</label><br>
+                    <input type="text" id="nombre_maestro" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="APaterno_maestro">Apellido Materno:</label><br>
+                    <input type="text" id="APaterno_maestro" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="AMaterno_maestro">Apellido Paterno:</label><br>
+                    <input type="text" id="AMaterno_maestro" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="contraseña_maestro">Contraseña:</label><br>
+                    <input type="password" id="contraseña_maestro" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="unidadAcademica_maestro">Unidad Académica:</label><br>
+                    <input type="text" id="unidadAcademica_maestro" class="campo-form" required>
+                </div>
+                <button type="submit" class="button-content">Enviar</button><br>
+            </div>
+    
+            <!-- Formulario para Administrador -->
+            <div id="adminForm" class="hidden">
+                <h2>Formulario para Administrador</h2>
+                <div>
+                    <label for="nombre_admin">Nombre</label><br>
+                    <input type="text" id="nombre_admin" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="AMaterno_admin">Apellido Materno</label><br>
+                    <input type="text" id="AMaterno_admin" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="APaterno_admin">Apellido Paterno</label><br>
+                    <input type="text" id="APaterno_admin" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="id_admin">ID:</label><br>
+                    <input type="text" id="id_admin" class="campo-form" required>
+                </div>
+                <div>
+                    <label for="contraseña_admin">Contraseña:</label><br>
+                    <input type="password" id="contraseña_admin" class="campo-form" required>
+                </div>
+                <button type="submit" class="button-content">Enviar</button><br>
+            </div>
+        </form>  
+    </div>  
+    </main>
+    <script>
+        function toggleForm(formId) {
+            // Ocultar todos los formularios
+            document.getElementById('studentForm').classList.add('hidden');
+            document.getElementById('teacherForm').classList.add('hidden');
+            document.getElementById('adminForm').classList.add('hidden');
+
+            // Mostrar el formulario seleccionado
+            document.getElementById(formId).classList.remove('hidden');
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Registro exitoso');
+        });
+    </script>
     <footer>&copy; 2024 ClassCheck</footer>
 </body>
 </html>
