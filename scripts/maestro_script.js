@@ -85,3 +85,25 @@ function redirectToRegistroAlumnoTutorado(event){
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
     window.location.href = './alumno_tutorado.html';
 }
+
+//Función para mostrar el QR
+function showQR() {
+    var qr = document.getElementById('qr');
+    var img = document.createElement('img');
+
+    var hora_inicio = document.getElementById("hora_inicio").value;
+    var hora_fin = document.getElementById("hora_fin").value;
+
+    if (hora_inicio === "" || hora_fin === ""){
+        alert("Ingrese un lapso de tiempo válido")
+    } else{
+        img.src = '/images/qr.png'; // Cambia esto a la ruta de tu imagen
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '100%';
+    
+        
+        qr.innerHTML = ''; // Limpiar cualquier contenido previo
+        qr.appendChild(img);
+        qr.classList.remove('hidden'); // Mostrar el div si estaba oculto
+    }
+}

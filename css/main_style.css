@@ -123,17 +123,18 @@ button:hover {
     font-size: 18px;
     margin: 18px;
 }
-.hidden {
-    display: none;
-}
 .observation-label {
+    display: block;
     background-color: white;
     color: black;
-    padding: 30px;
+    padding: 5px;
     margin-top: 5px;
     border-radius: 3px;
-    text-align: center;
+    text-align: left;
     width: 100%;
+}
+.hidden {
+    display: none;
 }
 .campo-form{
     border-radius: 5px;

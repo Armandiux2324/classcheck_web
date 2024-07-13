@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/main_style.css">
     <script src="/scripts/main_script.js"></script>
+    <script src="/scripts/maestro_script.js"></script>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -34,13 +35,13 @@
                 <h3 class="section_title">Generar QR de asistencia</h3>
                 <p class="p_instrucciones">Ingrese el lapso de tiempo de validez del QR:</p>
                 <h3>Hora de inicio:</h3>
-                <input type="time" placeholder="Hora de inicio" class="hora-qr" required>
+                <input type="time" placeholder="Hora de inicio" id="hora_inicio" class="hora-qr" required>
                 <h3>Hora de fin:</h3>
-                <input type="time" placeholder="Hora de fin" class="hora-qr" required>
-                <br><button class="button-content"><strong>Generar qr</strong></button><br>
+                <input type="time" placeholder="Hora de fin" id="hora_fin" class="hora-qr" required>
+                <br><button class="button-content" onclick="showQR()"><strong>Generar qr</strong></button><br>
             </div>
-            <div class="qr">
-                <img src="/images/qr.png" alt="">
+            <div id="qr" class="hidden qr">
+                El código QR se mostrará aquí
             </div><br><br><br><br><br>
         </div>
     </main>
