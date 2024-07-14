@@ -4,6 +4,41 @@ function redirectToMain(event) {
     window.location.href = 'main_admin.html';
 }
 
+//Funcion del change_pass_admin
+function passChangedAdmin(event) {
+    event.preventDefault(); // Evita el comportamiento por defecto del formulario
+
+    var passwordInput = document.getElementById("password").value;
+    var confPasswordInput = document.getElementById("conf_password").value;
+
+    if (passwordInput === confPasswordInput){
+        alert("Contraseña cambiada exitosamente")
+        window.location.href = './main_admin.html';
+    } else {
+        alert("Las contraseñas no coinciden, intente nuevamente");
+    }
+    
+}
+
+function redirectToChangePassAdmin(event) {
+    event.preventDefault(); // Evita el comportamiento por defecto del formulario
+
+    var passwordInput = document.getElementById("password").value;
+    var confPasswordInput = document.getElementById("conf_password").value;
+
+    if (passwordInput === "1234" && confPasswordInput === "1234"){
+        window.location.href = './change_pass_admin.html';
+    } else {
+        alert("Las contraseñas no coinciden, intente nuevamente");
+    }
+    
+}
+
+function redirectToConfPassAdmin(event) {
+    event.preventDefault(); // Evita el comportamiento por defecto del formulario
+    window.location.href = './conf_pass_admin.html';
+}
+
 //Función para regresar a inicio desde subcarpetas
 function redirectToMainFromSub(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
