@@ -12,7 +12,9 @@ This project is a web version of an application designed to streamline attendanc
 ## Contributors
 
 - **Jonathan Perez**: Project lead and student at Universidad Tecnológica del Estado de Zacatecas.
-- **Armando Candelas**: Collaborator and fellow student at the same university, contributing to project development and design.
+- **Armando Candelas**: Project lead and student at Universidad Tecnológica del Estado de Zacatecas.
+- **Both**: Jonathan Perez and Armando Candelas are the owners and collaborators of the project.
+
 
 ## Objective
 
