@@ -5,14 +5,14 @@
 body {
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    background-color: #060f14;
+    background-color: #f4f4f4; /* Fondo gris claro */
 }
 header {
     width: 100%;
     height: 80px;
-    background-color: #13454e;
+    background-color: #000; /* Negro */
     font-size: 40px;
-    color: #a6eaf5;
+    color: #fff; /* Blanco */
     position: fixed;
     top: 0;
     left: 0;
@@ -25,17 +25,16 @@ main {
     height: auto;
     width: 100%;
     margin-top: 80px;
-    background-color: #060f14;
-    color: #a6eaf5;
+    background-color: #f4f4f4; /* Fondo gris claro */
+    color: #000; /* Texto negro */
     display: flex;
 }
-.section_title{
+.section_title {
     font-size: 30px;
-    border: #a6eaf5 solid 3px;
-    border-style: outset ;
+    border: 3px solid #000; /* Borde negro */
     padding: 14px;
 }
-.buttons_list{
+.buttons_list {
     margin-left: 100px;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -46,7 +45,7 @@ main {
 #left {
     width: 180px;
     min-height: calc(100vh - 70px); 
-    background-color: #215a5250;
+    background-color: #ccc; /* Gris claro */
     position: fixed;
     top: 70px;
     left: 0;
@@ -57,7 +56,7 @@ main {
     margin-left: 200px; 
     padding: 20px;
     width: 300px;
-    background-color: #060f14;
+    background-color: #f4f4f4; /* Fondo gris claro */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,36 +64,36 @@ main {
 footer {
     width: 100%;
     height: 40px;
-    background-color: #13454e;
+    background-color: #000; /* Negro */
     text-align: center;
     padding-top: 10px;
-    color: #a6eaf5;
+    color: #fff; /* Blanco */
     position: fixed;
     bottom: 0;
     left: 0;
 }
 .pfp {
     margin: 25px;
-    border: 2px black solid;
+    border: 2px solid #000; /* Borde negro */
     width: 200px;
     height: 200px;
-    background: #fff;
+    background: #fff; /* Blanco */
 }
-button{
-    background: #04ad94;
-    color: rgb(22, 35, 34);
+button {
+    background: #0070c9; /* Azul oscuro */
+    color: #fff; /* Blanco */
     cursor: pointer;
     font-size: 16px;
-    transition: font-size 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 }
 .buttons-content {
-    margin: 20px ;
+    margin: 20px;
     margin-left: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.buttons-main-maestro{
+.buttons-main-maestro {
     margin: 20px;
 }
 .button-content {
@@ -103,7 +102,7 @@ button{
     border-radius: 10px;
     width: 400px;
 }
-.chpass_button{
+.chpass_button {
     width: 100%;
     border-radius: 10px;
     padding: 10px;
@@ -118,19 +117,19 @@ button{
     border-radius: 5px;
 }
 button:hover {
-    color: white;
+    background-color: #0056b3; /* Azul más claro al pasar el mouse */
 }
 .horario {
-    border: 2px black solid;
+    border: 2px solid #000; /* Borde negro */
 }
-.p_instrucciones{
+.p_instrucciones {
     font-size: 18px;
     margin: 18px;
 }
 .observation-label {
     display: block;
-    background-color: white;
-    color: black;
+    background-color: #fff; /* Blanco */
+    color: #000; /* Texto negro */
     padding: 5px;
     margin-top: 5px;
     border-radius: 3px;
@@ -140,24 +139,23 @@ button:hover {
 .hidden {
     display: none;
 }
-.campo-form{
+.campo-form {
     border-radius: 5px;
     width: 70%;
     height: 30px;
     margin: 10px;
 }
-.hora-qr{
+.hora-qr {
     border-radius: 5px;
     width: 70%;
     height: 30px;
     margin: 10px;
-   text-align: center;
+    text-align: center;
 }
-.qr{
-    background-color: white;
+.qr {
+    background-color: #fff; /* Blanco */
     margin-left: 200px;
     margin-right: 105px;
-    
 }
 .user-list {
     list-style-type: none;
@@ -169,48 +167,48 @@ button:hover {
     margin: 20px;
     font-size: 20px;
 }
-.button-list{
+.button-list {
     padding: 10px;
     margin-top: 6px;
     border-radius: 10px;
     width: 200px;
 }
-/*Calendario*/
+/* Calendario */
 .calendar-container {
     margin: 50px auto;
     margin-bottom: 20px;
     padding: 20px;
     max-width: 800px;
-    background-color: rgb(36, 107, 123);
+    background-color: #f4f4f4; /* Fondo gris claro */
     border-radius: 10px;
 }
 .calendar-table {
     width: 100%;
 }
 .calendar-table th, .calendar-table td {
-    border: 1px solid #343b3e;
+    border: 1px solid #000; /* Borde negro */
     padding: 10px;
     text-align: center;
 }
 .calendar-table th {
-    background-color: #060f14;
-    color: #a6eaf5;
+    background-color: #000; /* Negro */
+    color: #fff; /* Blanco */
 }
-/*Materias - Grupos*/
+/* Materias - Grupos */
 .materia {
     margin: 20px 0;
 }
 .materia-button {
-    background: #666;
-    color: white;
+    background: #666; /* Gris oscuro */
+    color: #fff; /* Blanco */
     padding: 10px;
     border: none;
     cursor: pointer;
     width: 200px;
     border-radius: 5px;
 }
-.materia-button:hover{
-    color: #060f14;
+.materia-button:hover {
+    color: #060f14; /* Azul oscuro al pasar el mouse */
 }
 .grupo-container {
     display: none;
