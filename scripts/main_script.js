@@ -39,7 +39,7 @@ function redirectToChangePass(event) {
     var confPasswordInput = document.getElementById("conf_password").value;
 
     if (passwordInput === "1234" && confPasswordInput === "1234"){
-        window.location.href = '../change_pass.php';
+        window.location.href = 'change_pass.php';
     } else {
         alert("Las contraseñas no coinciden, intente nuevamente");
     }

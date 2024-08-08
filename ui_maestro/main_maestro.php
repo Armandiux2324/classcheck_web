@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClassCheck</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main_style.css">
-    <script src="/scripts/maestro_script.js"></script>
-    <script src="/scripts/main_script.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/main_style.css">
+    <script src="../scripts/maestro_script.js"></script>
+    <script src="../scripts/main_script.js"></script>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -39,7 +39,7 @@
             </div>
             <h3>Horario:</h3><br>
             <div class="horario">
-                <img src="/images/horario.jpeg" alt="">
+                <img src="../images/horario.jpeg" alt="">
             </div><br><br><br><br><br>
         </div>
     </main>

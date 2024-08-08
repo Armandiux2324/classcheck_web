@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClassCheck - Búsqueda de Usuarios</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/index_style.css">
-    <link rel="stylesheet" href="/css/main_style.css">
-    <script src="/scripts/index_script.js"></script>
-    <script src="/scripts/admin_script.js"></script>
+    <link rel="stylesheet" href="../../css/index_style.css">
+    <script src="../../scripts/index_script.js"></script>
+    <script src="../../scripts/main_script.js"></script>
+    <script src="../../scripts/admin_script.js"></script>
 </head>
 <body>
     <header>ClassCheck</header>

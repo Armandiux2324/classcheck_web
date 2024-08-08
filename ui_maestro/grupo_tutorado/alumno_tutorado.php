@@ -6,9 +6,9 @@
     <title>ClassCheck - Grupo tutorado - Alumno</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main_style.css">
-    <script src="/scripts/main_script.js"></script>
-    <script src="/scripts/maestro_script.js"></script>
+    <link rel="stylesheet" href="../../css/main_style.css">
+    <script src="../../scripts/main_script.js"></script>
+    <script src="../../scripts/maestro_script.js"></script>
 </head>
 <body>
     <header>ClassCheck</header>

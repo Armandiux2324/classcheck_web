@@ -40,7 +40,7 @@ function passChanged(event) {
 
     if (passwordInput === confPasswordInput){
         alert("Contraseña cambiada exitosamente")
-        window.location.href = '/ui_maestro/main_maestro.php';
+        window.location.href = 'ui_maestro/main_maestro.php';
     } else {
         alert("Las contraseñas no coinciden, intente nuevamente");
     }
@@ -97,7 +97,7 @@ function showQR() {
     if (hora_inicio === "" || hora_fin === ""){
         alert("Ingrese un lapso de tiempo válido")
     } else{
-        img.src = '/images/qr.png'; // Cambia esto a la ruta de tu imagen
+        img.src = '../images/qr.png'; 
         img.style.maxWidth = '100%';
         img.style.maxHeight = '100%';
     
