@@ -1,7 +1,7 @@
 //Función para regresar a inicio
 function redirectToMain(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = 'main_admin.html';
+    window.location.href = 'main_admin.php';
 }
 
 //Funcion del change_pass_admin
@@ -13,7 +13,7 @@ function passChangedAdmin(event) {
 
     if (passwordInput === confPasswordInput){
         alert("Contraseña cambiada exitosamente")
-        window.location.href = './main_admin.html';
+        window.location.href = './main_admin.php';
     } else {
         alert("Las contraseñas no coinciden, intente nuevamente");
     }
@@ -27,7 +27,7 @@ function redirectToChangePassAdmin(event) {
     var confPasswordInput = document.getElementById("conf_password").value;
 
     if (passwordInput === "1234" && confPasswordInput === "1234"){
-        window.location.href = './change_pass_admin.html';
+        window.location.href = './change_pass_admin.php';
     } else {
         alert("Las contraseñas no coinciden, intente nuevamente");
     }
@@ -36,34 +36,34 @@ function redirectToChangePassAdmin(event) {
 
 function redirectToConfPassAdmin(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './conf_pass_admin.html';
+    window.location.href = './conf_pass_admin.php';
 }
 
 //Función para regresar a inicio desde subcarpetas
 function redirectToMainFromSub(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = '../main_admin.html';
+    window.location.href = '../main_admin.php';
 }
 
 //Funciones del main admin
 function redirectToConfPass(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = '../../conf_pass.html';
+    window.location.href = '../../conf_pass.php';
 }
 
 function redirectToAdminUsers(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = 'main_administrar_usuarios.html';
+    window.location.href = 'main_administrar_usuarios.php';
 }
 
 function redirectToAsignSchedule(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = 'AsignarHorariosAdmin/AsignarH_A.html';
+    window.location.href = 'AsignarHorariosAdmin/AsignarH_A.php';
 }
 
 function redirectToAsignGroup(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = 'AsignarGruposAdmin/AsignarGruposAdmin.html';
+    window.location.href = 'AsignarGruposAdmin/AsignarGruposAdmin.php';
 }
 
 //Acciones de fin de cuatrimestre
@@ -86,12 +86,12 @@ function updateGrades(event) {
 //Funciones de agregar usuarios
 function redirectToAddUser(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './agregar_usuarios.html';
+    window.location.href = './agregar_usuarios.php';
 }
 
 function redirectToConfUser(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './ModificarUsuarios/ConfIdentidad_admin.html';
+    window.location.href = './ModificarUsuarios/ConfIdentidad_admin.php';
 }
 
 
@@ -112,7 +112,7 @@ function redirectToSearchUser(event) {
     var confPasswordInput = document.getElementById("conf_password").value;
 
     if (passwordInput === "1234" && confPasswordInput === "1234"){
-        window.location.href = 'ModificarUsuarios_buscar.html';
+        window.location.href = 'ModificarUsuarios_buscar.php';
     } else {
         alert("Las contraseñas no coinciden, intente nuevamente");
     }
@@ -151,13 +151,13 @@ function redirectToModifyUser(event) {
 
     switch (userRole.toLowerCase()) {
         case 'alumno':
-            window.location.href = './ModificarUsuariosEstudiante.html';
+            window.location.href = './ModificarUsuariosEstudiante.php';
             break;
         case 'maestro':
-            window.location.href = './ModificarUsuariosMaestro.html';
+            window.location.href = './ModificarUsuariosMaestro.php';
             break;
         case 'admin':
-            window.location.href = './ModificarUsuariosAdmin.html';
+            window.location.href = './ModificarUsuariosAdmin.php';
             break;
     }
 }
@@ -189,7 +189,7 @@ function redirectToSearchUserForDelete(event) {
 //Función para confirmar identidad y borrar usuarios
 function redirectToConfUserForDelete(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './BorrarUsuarios/ConfIdentidadPBorrar.html';
+    window.location.href = './BorrarUsuarios/ConfIdentidadPBorrar.php';
 }
 
 //Función para borrar usuarios
@@ -204,12 +204,12 @@ function deleteUser(event){
 //Funciones para enviar a asignar horario según rol
 function redirectToAsignScheduleTeacher(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './AsignarH_Aopcion1.html';
+    window.location.href = './AsignarH_Aopcion1.php';
 }
 
 function redirectToAsignScheduleStudent(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './AsignarH_Aopcion2.html';
+    window.location.href = './AsignarH_Aopcion2.php';
 }
 
 //Función para agregar horario
@@ -230,12 +230,12 @@ function uploadSchedule(event){
 //Funciones para enviar a asignar grupos
 function redirectToAsignClassGroup(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './AsignarGruposOpcion1.html';
+    window.location.href = './AsignarGruposOpcion1.php';
 }
 
 function redirectToAsignTutorGroup(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './AsignarGruposOpcion2.html';
+    window.location.href = './AsignarGruposOpcion2.php';
 }
 
 //Función para asignar grupos

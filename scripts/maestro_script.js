@@ -1,33 +1,33 @@
 //Función para regresar a inicio
 function redirectToMain(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './main_maestro.html';
+    window.location.href = './main_maestro.php';
 }
 //Función para regresar a inicio desde grupo tutorado
 function redirectToMainFromTutorado(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = '../main_maestro.html';
+    window.location.href = '../main_maestro.php';
 }
 
 //Funciones del main maestro
 function redirectToConfPass(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = '../conf_pass.html';
+    window.location.href = '../conf_pass.php';
 }
 
 function redirectToSelecGrupoQR(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './selec_grupo_qr_maestro.html';
+    window.location.href = './selec_grupo_qr_maestro.php';
 }
 
 function redirectToListaGrupos(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './listagrupos_maestro.html';
+    window.location.href = './listagrupos_maestro.php';
 }
 
 function redirectToRegistrosTutorado(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './grupo_tutorado/registros_tutorado.html';
+    window.location.href = './grupo_tutorado/registros_tutorado.php';
 }
 
 
@@ -40,7 +40,7 @@ function passChanged(event) {
 
     if (passwordInput === confPasswordInput){
         alert("Contraseña cambiada exitosamente")
-        window.location.href = '/ui_maestro/main_maestro.html';
+        window.location.href = '/ui_maestro/main_maestro.php';
     } else {
         alert("Las contraseñas no coinciden, intente nuevamente");
     }
@@ -50,19 +50,19 @@ function passChanged(event) {
 //Funcion del selector de grupo para generar el QR
 function redirectToGeneradorQR(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './generar_qr.html';
+    window.location.href = './generar_qr.php';
 }
 
 //Función del selector de grupo para ver la lista de alumnos
 function redirectToListaAlumnos(event){
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './lista_grupo_maestro.html';
+    window.location.href = './lista_grupo_maestro.php';
 }
 
 //Función para que el maestro vea los registros del alumno
 function redirectToRegistroAlumno(event){
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './registro_alumno_maestro.html';
+    window.location.href = './registro_alumno_maestro.php';
 }
 
 //Función para guardar observaciones
@@ -83,7 +83,7 @@ function guardarObservaciones(event){
 //Función para que el tutor vea los registros de alumnos de su grupo tutorado
 function redirectToRegistroAlumnoTutorado(event){
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './alumno_tutorado.html';
+    window.location.href = './alumno_tutorado.php';
 }
 
 //Función para mostrar el QR

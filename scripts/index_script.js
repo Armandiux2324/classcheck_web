@@ -14,9 +14,9 @@ function redirectToPage(event) {
     var passwordInput = document.getElementById("password").value;
 
     if (userInput === "maestro" && passwordInput === "1234") {
-        window.location.href = '/ui_maestro/main_maestro.html'; // Redirige a la página del maestro
+        window.location.href = '/ui_maestro/main_maestro.php'; // Redirige a la página del maestro
     } else if (userInput === "admin" && passwordInput === "1234") {
-        window.location.href = '/ui_administrador/main_admin.html'; // Redirige a la página del admin
+        window.location.href = '/ui_administrador/main_admin.php'; // Redirige a la página del admin
     } else if (userInput == "alumno"){
         alert("El usuario ingresado es un alumno, inicie sesión en su teléfono")
     } else {
