@@ -39,7 +39,7 @@ header {
     border-radius: 10px;
     width: calc(100% - 20px);
     padding: 10px;
-    color: #fff; /* Blanco */
+    color: black; /* Blanco */
     margin-bottom: 1px;
     margin-top: 10px;
     font-size: 18px;
