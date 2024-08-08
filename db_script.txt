@@ -1,0 +1,34 @@
+create table maestro(id int primary key not null AUTO_INCREMENT, username varchar(100) not null, foto_perfil varchar(100), horario varchar(100), nombre_maestro varchar(30) not null, apaterno_maestro varchar(30) not null, amaterno_maestro varchar(30) not null, password_hash varchar(100) not null, unidad_academica_id int);
+
+CREATE TABLE unidad_academica (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nombre_ua VARCHAR(100) NOT NULL);
+
+CREATE TABLE grupo_tutorado (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nombre_grupo_tutorado VARCHAR(5) NOT NULL,
+    maestro_id INT NOT NULL,
+    FOREIGN KEY (maestro_id) REFERENCES maestro(id));
+
+alter table maestro add constraint fk_m_ua foreign key (unidad_academica_id) references unidad_academica(id)
+
+CREATE TABLE grupos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    carrera varchar(100),
+    nombre_grupo VARCHAR(100) NOT NULL, horario varchar(100));
+
+create table alumno(matricula int primary key not null, nombre_alumno varchar(100) not null, apaterno_alumno varchar(100), amaterno_alumno varchar(100) not null, username varchar(100) not null,  password_hash varchar(100), u_academica_id int);
+
+create table grupos_alumno(matricula_alumno int, grupo_id int, primary key (matricula_alumno, grupo_id));
+
+alter table grupos_alumno add constraint fk_ga_a foreign key (matricula_alumno) references alumno(matricula);
+
+alter table grupos_alumno add constraint fk_ga_g foreign key (grupo_id) references grupos(id);
+
+alter table alumno add constraint fk_a_ua foreign key (u_academica_id) references unidad_academica(id);
+
+create table asistencias(codigo_qr varchar(100) primary key, grupo_id int);
+
+alter table asistencias add CONSTRAINT fk_a_g foreign key (grupo_id) references grupos(id);
+
+create table administrador(id_admin int primary key not null, nombre_admin varchar(100), apaterno_admin varchar(100), amaterno_admin varchar(100), username varchar(100), password_hash varchar(100))
