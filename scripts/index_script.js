@@ -6,20 +6,3 @@ function togglePasswordVisibility() {
         passwordInput.type = "password";
     }
 }
-//Para enviar a pantalla principal según su rol
-function redirectToPage(event) {
-    event.preventDefault(); // Evita el comportamiento por defecto del formulario
-
-    var userInput = document.getElementById("username").value;
-    var passwordInput = document.getElementById("password").value;
-
-    if (userInput === "maestro" && passwordInput === "1234") {
-        window.location.href = 'ui_maestro/main_maestro.php'; // Redirige a la página del maestro
-    } else if (userInput === "admin" && passwordInput === "1234") {
-        window.location.href = 'ui_administrador/main_admin.php'; // Redirige a la página del admin
-    } else if (userInput == "alumno"){
-        alert("El usuario ingresado es un alumno, inicie sesión en su teléfono")
-    } else {
-        alert("Usuario o contraseña incorrectos");
-    }
-}

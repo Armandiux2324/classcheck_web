@@ -6,15 +6,18 @@
     <title>ClassCheck - Iniciar Sesión</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index_style.css">
+    <?php 
+    require_once ('php/login.php');
+    ?>
     <script src="scripts/index_script.js"></script>
 </head>
 <body>
     <div class="login-container">
         <header>ClassCheck</header>     
         <h2>Iniciar sesión</h2>
-        <form id="loginForm" onsubmit="redirectToPage(event)" method="POST">
-            <input type="text" class="login-input" id="username" placeholder="Nombre de usuario" required>
-            <input type="password" class="login-input" id="password" placeholder="Contraseña" required>
+        <form id="loginForm" method="POST">
+            <input type="text" class="login-input" id="username" name="username" placeholder="Nombre de usuario" required>
+            <input type="password" class="login-input" id="password" name="password" placeholder="Contraseña" required>
             <span onclick="togglePasswordVisibility()">Mostrar Contraseña</span>
             <button type="submit" class="login-button" ><strong>Iniciar Sesión</strong></button>
         </form>

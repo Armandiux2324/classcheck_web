@@ -14,6 +14,7 @@
         <div id="left">
             <div class="menu">
                 <button class="button-menu" onclick="redirectToMain(event)"><strong>Inicio</strong></button>
+                <button class="button-menu" onclick="redirectToIndex(event)"><strong>Cerrar sesión</strong></button>
             </div>
         </div>
         <div id="user_info">
