@@ -41,7 +41,9 @@
                     <button class="button-content" onclick="redirectToAsignSchedule(event)"><strong>Asignar horarios</strong></button><br><br>
                     <button class="button-content" onclick="redirectToAsignGroup(event)"><strong>Asignar grupos a maestros</strong></button><br><br>
                     <p class="p_instrucciones">Acciones para fin de cuatrimestre:</p><br>
-                    <button class="button-content" name="borrar_grupos_asignados"><strong>Eliminar grupos asignados a los maestros</strong></button><br><br>
+                    <form id="deleteForm" action="main_admin.php" method="POST">
+                        <button type="submit" class="button-content" name="borrar_grupos_asignados"><strong>Eliminar grupos asignados a los maestros</strong></button>
+                    </form><br>
                     <button class="button-content" onclick="updateGrades(event)"><strong>Actualizar grado y grupo de los alumnos</strong></button><br><br>
                 </div>
                 

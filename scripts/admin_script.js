@@ -45,6 +45,11 @@ function redirectToConfPassAdmin(event) {
     window.location.href = './conf_pass_admin.php';
 }
 
+function redirectToConfPassForDelete(event) {
+    event.preventDefault(); // Evita el comportamiento por defecto del formulario
+    window.location.href = '../conf_pass_delete.php';
+}
+
 //Función para regresar a inicio desde subcarpetas
 function redirectToMainFromSub(event) {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
@@ -73,14 +78,6 @@ function redirectToAsignGroup(event) {
 }
 
 //Acciones de fin de cuatrimestre
-function deleteAllAsignedGroups(event) {
-    event.preventDefault();
-    var userConfirmed = confirm("¿Está seguro de que desea eliminar todos los grupos asignados?");
-    if (userConfirmed) {
-        alert("Grupos eliminados con éxito.");
-    }
-}
-
 function updateGrades(event) {
     event.preventDefault();
     var userConfirmed = confirm("Se actualizará el grado de todos los alumnos (ej. 3° -> 4°)");
