@@ -44,7 +44,9 @@
                     <form id="deleteForm" action="main_admin.php" method="POST">
                         <button type="submit" class="button-content" name="borrar_grupos_asignados"><strong>Eliminar grupos asignados a los maestros</strong></button>
                     </form><br>
-                    <button class="button-content" onclick="updateGrades(event)"><strong>Actualizar grado y grupo de los alumnos</strong></button><br><br>
+                    <form id="updateForm" action="main_admin.php" method="POST">
+                        <button type="submit" class="button-content" name="actualizar_grado"><strong>Actualizar grado y grupo de los alumnos</strong></button><br><br>
+                    </form>
                 </div>
                 
             </div>
