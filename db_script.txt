@@ -17,6 +17,8 @@ CREATE TABLE grupos (
     carrera varchar(100),
     nombre_grupo VARCHAR(100) NOT NULL, horario varchar(100));
 
+alter table grupos add column grado int(2);
+
 create table alumno(matricula int primary key not null, nombre_alumno varchar(100) not null, apaterno_alumno varchar(100), amaterno_alumno varchar(100) not null, username varchar(100) not null,  password_hash varchar(100), u_academica_id int);
 
 create table grupos_alumno(matricula_alumno int, grupo_id int, primary key (matricula_alumno, grupo_id));
@@ -32,3 +34,26 @@ create table asistencias(codigo_qr varchar(100) primary key, grupo_id int);
 alter table asistencias add CONSTRAINT fk_a_g foreign key (grupo_id) references grupos(id);
 
 create table administrador(id_admin int primary key not null, nombre_admin varchar(100), apaterno_admin varchar(100), amaterno_admin varchar(100), username varchar(100), password_hash varchar(100))
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('alumno', 'maestro', 'administrador') NOT NULL);
+
+Alter table maestro ADD CONSTRAINT fk_m_u FOREIGN KEY (usuario_id) REFERENCES users(id);
+
+ALTER TABLE alumno 
+ADD COLUMN usuario_id INT,
+ADD CONSTRAINT fk_alumno_usuario FOREIGN KEY (usuario_id) REFERENCES users(id);
+
+ALTER TABLE administrador 
+ADD COLUMN usuario_id INT,
+ADD CONSTRAINT fk_administrador_usuario FOREIGN KEY (usuario_id) REFERENCES users(id);
+
+create table grupos_maestro(grupo_id int, maestro_id int, PRIMARY key (grupo_id, maestro_id));
+
+alter table grupos_maestro add constraint fk_gm_m foreign key (maestro_id) references maestro(id);
+
+alter table grupos_maestro add constraint fk_gm_g foreign key (grupo_id) references grupos(id);
+

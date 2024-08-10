@@ -7,6 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main_style.css">
     <script src="../scripts/admin_script.js"></script>
+    <?php
+        require_once ('../php/php_admin/fin_cuatri.php');
+    ?>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -38,7 +41,7 @@
                     <button class="button-content" onclick="redirectToAsignSchedule(event)"><strong>Asignar horarios</strong></button><br><br>
                     <button class="button-content" onclick="redirectToAsignGroup(event)"><strong>Asignar grupos a maestros</strong></button><br><br>
                     <p class="p_instrucciones">Acciones para fin de cuatrimestre:</p><br>
-                    <button class="button-content"><strong onclick="deleteAllAsignedGroups(event)">Eliminar grupos asignados a los maestros</strong></button><br><br>
+                    <button class="button-content" name="borrar_grupos_asignados"><strong>Eliminar grupos asignados a los maestros</strong></button><br><br>
                     <button class="button-content" onclick="updateGrades(event)"><strong>Actualizar grado y grupo de los alumnos</strong></button><br><br>
                 </div>
                 

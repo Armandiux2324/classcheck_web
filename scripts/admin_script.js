@@ -1,7 +1,7 @@
 //Función para regresar a login
-function redirectToIndex(event) {
+function redirectToIndex() {
     event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './index.php';
+    window.location.href = '../index.php';
 }
 
 //Función para regresar a inicio
