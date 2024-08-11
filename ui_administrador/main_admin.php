@@ -9,7 +9,18 @@
     <script src="../scripts/admin_script.js"></script>
     <?php
         require_once ('../php/php_admin/fin_cuatri.php');
-    ?>
+        session_start();
+
+        // Verificar si el usuario ha iniciado sesión como administrador
+        if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'administrador') {
+            header("Location: ../login.php");
+            exit();
+        }
+
+        // Obtener la información del administrador de la sesión
+        $admin_id = $_SESSION['admin_id'];
+        $admin_nombre = $_SESSION['admin_nombre'];
+        ?>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -26,9 +37,9 @@
                     <h1>Perfil de usuario</h1>
                     <div class="pfp"></div>
                     <h3>Nombre:</h3>
-                    <p>xxxxxx</p><br>
+                    <p><?php echo htmlspecialchars($admin_nombre); ?></p><br>
                     <h3>ID de administrador:</h3>
-                    <p>x</p><br>
+                    <p><?php echo htmlspecialchars($admin_id); ?></p><br>
                     <button class="chpass_button" id="modif_pass" onclick="redirectToConfPassAdmin(event)"><strong>Modificar contraseña</strong></button>
                 </div>
             </div>
@@ -45,7 +56,7 @@
                         <button type="submit" class="button-content" name="borrar_grupos_asignados"><strong>Eliminar grupos asignados a los maestros</strong></button>
                     </form><br>
                     <form id="updateForm" action="main_admin.php" method="POST">
-                        <button type="submit" class="button-content" name="actualizar_grado"><strong>Actualizar grado y grupo de los alumnos</strong></button><br><br>
+                        <button type="submit" class="button-content" name="actualizar_grado"><strong>Actualizar grado de los grupos</strong></button><br><br>
                     </form>
                 </div>
                 

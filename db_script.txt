@@ -41,12 +41,6 @@ CREATE TABLE users (
     password_hash VARCHAR(255) NOT NULL,
     role ENUM('alumno', 'maestro', 'administrador') NOT NULL);
 
-Alter table maestro ADD CONSTRAINT fk_m_u FOREIGN KEY (usuario_id) REFERENCES users(id);
-
-ALTER TABLE alumno 
-ADD COLUMN usuario_id INT,
-ADD CONSTRAINT fk_alumno_usuario FOREIGN KEY (usuario_id) REFERENCES users(id);
-
 ALTER TABLE administrador 
 ADD COLUMN usuario_id INT,
 ADD CONSTRAINT fk_administrador_usuario FOREIGN KEY (usuario_id) REFERENCES users(id);
@@ -57,3 +51,28 @@ alter table grupos_maestro add constraint fk_gm_m foreign key (maestro_id) refer
 
 alter table grupos_maestro add constraint fk_gm_g foreign key (grupo_id) references grupos(id);
 
+create table carreras(id int primary key, nombre_carrera varchar(50));
+
+alter table grupos add column carrera_id int;
+
+alter table grupos drop column carrera;
+
+alter table grupos add constraint fk_g_c foreign key (carrera_id) references carreras(id);
+
+alter table alumno add column grupo_id int;
+
+alter table alumno add constraint fk_g_a foreign key (grupo_id) references grupos(id);
+
+alter table grupos add column uacademica_id int;
+
+alter table grupos add constraint fk_g_ua foreign key (uacademica_id) references unidad_academica(id);
+
+create table observaciones(id int primary key, matricula_alumno int, materia_id int, observacion varchar(100));
+
+create table materias(id int primary key, maestro_id int, grupo_id int, nombre_materia varchar(50));
+
+alter table materias add constraint fk_materias_maestro foreign key (maestro_id) references maestro(id);
+
+alter table materias add constraint fk_materias_grupo foreign key (grupo_id) references grupos(id);
+
+alter table observaciones add constraint fk_observaciones_materia foreign key (materia_id) references materias(id);

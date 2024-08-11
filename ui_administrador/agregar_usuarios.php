@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="../css/main_style.css">
     <script src="../scripts/main_script.js"></script>
     <script src="../scripts/admin_script.js"></script>
+    <?php
+    require_once ('../php/php_admin/insert_usuarios.php');
+
+    $query_ua_maestro = "SELECT nombre_ua FROM unidad_academica";
+    $result_ua_maestro = $conn->query($query_ua_maestro);
+
+    ?>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -31,7 +38,7 @@
         <div class="buttons-content">     
             <br><h1>Formulario de Registro</h1>
             <p class="p_instrucciones">Seleccione el rol del usuario a añadir</p>
-        <form id="registrationForm">
+        <form id="registrationForm" method="POST" name="registrationForm">
             <label>
                 <input type="radio" name="role" value="student" onclick="toggleForm('studentForm')"> Estudiante
             </label>
@@ -43,113 +50,81 @@
             </label>
     
             <!-- Formulario para Estudiante -->
-            <div id="studentForm" class="hidden">
+            <div id="studentForm" name="studentForm" class="hidden">
                 <br><h2>Formulario para Estudiante</h2><br>
                 <div>
                     <label for="matricula">Matrícula (nombre de usuario):</label><br>
-                    <input type="text" id="matricula" class="campo-form" required>
+                    <input type="text" name="matricula" id="matricula" class="campo-form" pattern="[0-9]{9}">
                 </div>
                 <div>
                     <label for="nombre_estudiante">Nombre:</label><br>
-                    <input type="text" id="nombre_estudiante" class="campo-form" required>
+                    <input type="text" id="nombre_estudiante" name="nombre_estudiante" class="campo-form" pattern="[A-Za-zÀ-ÿ\s]+">
                 </div>
                 <div>
                     <label for="APaterno_estudiante">Apellido Paterno:</label><br>
-                    <input type="text" id="APaterno_estudiante" class="campo-form" required>
+                    <input type="text" id="APaterno_estudiante" name="APaterno_estudiante" class="campo-form" pattern="[A-Za-zÀ-ÿ\s]+">
                 </div>
                 <div>
-                    <label for="AMaterno_estudiante">Apellido Paterno:</label><br>
-                    <input type="text" id="AMaterno_estudiante" class="campo-form" required>
+                    <label for="AMaterno_estudiante">Apellido Materno:</label><br>
+                    <input type="text" id="AMaterno_estudiante" name="AMaterno_estudiante" class="campo-form" pattern="[A-Za-zÀ-ÿ\s]+">
                 </div>
                 <div>
-                    <label for="contraseña_estudiante">Contraseña:</label><br>
-                    <input type="password" id="contraseña_estudiante" class="campo-form" required>
+                    <label for="contraseña_estudiante">Contraseña (Matrícula):</label><br>
+                    <input type="text" id="contraseña_estudiante" name="password_estudiante" class="campo-form" pattern="[0-9]{9}">
                 </div>
-                <div>
-                    <label for="unidadAcademica_estudiante">Unidad Académica:</label><br>
-                    <select id="unidadAcademica_estudiante" class="campo-form" required>
-                        <option value="UTZAC">UTZAC</option>
-                        <option value="U.A. de Pinos">U.A. de Pinos</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="carrera">Carrera:</label><br>
-                    <select id="carrera" class="campo-form" required>
-                        <option value="Desarrollo de software">Desarrolllo de software</option>
-                        <option value="Minas">Minas</option>
-                        <option value="Fisioterapia">Fisioterapia</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="grado">Grado:</label><br>
-                    <select id="grado" class="campo-form" required>
-                        <option value="3ro">3ro</option>
-                        <option value="5to">5to</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="grupo">Grupo:</label><br>
-                    <select id="grupo" class="campo-form" required>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                    </select>
-                </div>
-                <button type="submit" class="button-content" onclick="addUser(event)">Enviar</button><br><br><br>
+                <button type="submit" class="button-content" name="insertAlumno">Guardar alumno</button><br><br><br>
             </div>
     
             <!-- Formulario para Maestro -->
-            <br><div id="teacherForm" class="hidden"><br>
+            <br><div id="teacherForm" name="teacherForm" class="hidden"><br>
                 <h2>Formulario para Maestro</h2>
                 <div>
+                    <label for="username_maestro">Nombre de usuario (Primeros 10 caracteres de la CURP):</label><br>
+                    <input type="text" id="username_maestro" name="username_maestro" class="campo-form" pattern="[A-Z][AEIOU][A-Z][A-Z][0-9]{2}[0-9]{2}[0-9]{2}">
+                </div>
+                <div>
                     <label for="nombre_maestro">Nombre:</label><br>
-                    <input type="text" id="nombre_maestro" class="campo-form" required>
+                    <input type="text" id="nombre_maestro" name="nombre_maestro" class="campo-form" pattern="[A-Za-zÀ-ÿ\s]+">
                 </div>
                 <div>
                     <label for="APaterno_maestro">Apellido Materno:</label><br>
-                    <input type="text" id="APaterno_maestro" class="campo-form" required>
+                    <input type="text" id="APaterno_maestro" name="APaterno_maestro" class="campo-form" pattern="[A-Za-zÀ-ÿ\s]+">
                 </div>
                 <div>
                     <label for="AMaterno_maestro">Apellido Paterno:</label><br>
-                    <input type="text" id="AMaterno_maestro" class="campo-form" required>
+                    <input type="text" id="AMaterno_maestro" name="AMaterno_maestro" class="campo-form" pattern="[A-Za-zÀ-ÿ\s]+">
                 </div>
                 <div>
-                    <label for="contraseña_maestro">Contraseña:</label><br>
-                    <input type="password" id="contraseña_maestro" class="campo-form" required>
+                    <label for="contraseña_maestro">Contraseña (igual que el nombre de usuario):</label><br>
+                    <input type="text" id="contraseña_maestro" name="password_maestro" class="campo-form" pattern="[A-Z][AEIOU][A-Z][A-Z][0-9]{2}[0-9]{2}[0-9]{2}">
                 </div>
-                <div>
-                    <label for="unidadAcademica_maestro">Unidad Académica:</label><br>
-                    <select id="unidadAcademica_maestro" class="campo-form" required>
-                        <option value="UTZAC">UTZAC</option>
-                        <option value="U.A. de Pinos">U.A. de Pinos</option>
-                    </select>
-                </div>
-                <button type="submit" class="button-content" onclick="addUser(event)">Enviar</button><br><br><br>
+                <button type="submit" class="button-content" name="insertMaestro">Guardar maestro</button><br><br><br>
             </div>
     
             <!-- Formulario para Administrador -->
-            <br><div id="adminForm" class="hidden">
+            <br><div id="adminForm" name="adminForm" class="hidden">
                 <h2>Formulario para Administrador</h2>
                 <div>
-                    <label for="nombre_admin">Nombre</label><br>
-                    <input type="text" id="nombre_admin" class="campo-form" required>
+                    <label for="username_admin">Nombre de usuario (Libre):</label><br>
+                    <input type="text" id="username_admin" name="username_admin" class="campo-form">
                 </div>
                 <div>
-                    <label for="AMaterno_admin">Apellido Materno</label><br>
-                    <input type="text" id="AMaterno_admin" class="campo-form" required>
+                    <label for="nombre_admin">Nombre:</label><br>
+                    <input type="text" id="nombre_admin" name="nombre_admin" class="campo-form" pattern="[A-Za-zÀ-ÿ\s]+">
                 </div>
                 <div>
-                    <label for="APaterno_admin">Apellido Paterno</label><br>
-                    <input type="text" id="APaterno_admin" class="campo-form" required>
+                    <label for="AMaterno_admin">Apellido Materno:</label><br>
+                    <input type="text" id="AMaterno_admin" name="AMaterno_admin" class="campo-form" pattern="[A-Za-zÀ-ÿ\s]+">
                 </div>
                 <div>
-                    <label for="id_admin">ID:</label><br>
-                    <input type="text" id="id_admin" class="campo-form" required>
+                    <label for="APaterno_admin">Apellido Paterno:</label><br>
+                    <input type="text" id="APaterno_admin" name="APaterno_admin" class="campo-form" pattern="[A-Za-zÀ-ÿ\s]+">
                 </div>
                 <div>
-                    <label for="contraseña_admin">Contraseña:</label><br>
-                    <input type="password" id="contraseña_admin" class="campo-form" required>
+                    <label for="contraseña_admin">Contraseña (Mismo nombre de usuario):</label><br>
+                    <input type="text" id="password_admin" name="password_admin" class="campo-form">
                 </div>
-                <button type="submit" class="button-content" onclick="addUser(event)">Enviar</button><br><br><br><br>
+                <button type="submit" class="button-content" name="insertAdmin">Guardar administrador</button><br><br><br><br>
             </div>
         </form>  
     </div>  
