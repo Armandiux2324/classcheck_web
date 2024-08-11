@@ -122,32 +122,6 @@ function redirectToSearchUser(event) {
     
 }
 
-//Función para buscar usuarios
-function findUser() {
-    var input = document.getElementById('searchUser').value.toLowerCase();
-    var userList = document.getElementById('userList');
-    var users = userList.getElementsByTagName('li');
-    var hasMatches = false;
-
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i].textContent || users[i].innerText;
-        if (user.toLowerCase().includes(input)) {
-            users[i].style.display = '';
-            hasMatches = true;
-        } else {
-            users[i].style.display = 'none';
-        }
-    }
-
-    // Mostrar la lista si hay coincidencias, ocultarla si no hay
-    if (input && hasMatches) {
-        userList.classList.remove('hidden');
-    } else {
-        alert("No se encontró al usuario")
-        userList.classList.add('hidden');
-    }
-}
-
 //Función para enviar a modificar según el rol
 function redirectToModifyUser(event) {
     var userRole = event.target.textContent || event.target.innerText;

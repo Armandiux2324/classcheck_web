@@ -24,7 +24,6 @@
         $username = trim($_POST['searchUser']);
 
         if (!empty($username)) {
-            // Realiza la búsqueda solo si el campo no está vacío
             $query = "SELECT * FROM users WHERE username LIKE ?";
             $username = "%$username%";
             $stmt = $conn->prepare($query);
@@ -32,8 +31,36 @@
             $stmt->execute();
             $result = $stmt->get_result();
         } else {
-            // Si el campo está vacío, setea $result a false para mostrar "Sin resultados de búsqueda"
             $result = false;
+        }
+    }
+
+    if (isset($_POST['selected_user'])) {
+        $selected_user = $_POST['selected_user'];
+        
+        // Buscar el rol del usuario
+        $query = "SELECT role FROM users WHERE username = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $selected_user);
+        $stmt->execute();
+        $result_role = $stmt->get_result();
+
+        if ($result_role->num_rows > 0) {
+            $row = $result_role->fetch_assoc();
+            $role = $row['role'];
+
+            // Redirigir según el rol
+            if ($role === 'administrador') {
+                header("Location: ./ModificarUsuariosAdmin.php");
+                exit;
+            } elseif ($role === 'maestro') {
+                header("Location: ./ModificarUsuariosMaestro.php");
+                exit;
+            }
+            elseif ($role === 'alumno') {
+                header("Location: ./ModificarUsuariosEstudiante.php");
+                exit;
+            }
         }
     }
     
@@ -70,7 +97,7 @@
                     <?php
                         if ($result && $result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                echo '<li>' . htmlspecialchars($row['username']) . '</li>';
+                                echo '<li><button class="button-content" name="selected_user" value="' . htmlspecialchars($row['username']) . '">' . htmlspecialchars($row['username']) . '</button></li>';
                             }
                         } elseif (isset($_POST['button_buscar'])) {
                             echo '<li>Sin resultados de búsqueda</li>';
