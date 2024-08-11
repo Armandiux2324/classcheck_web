@@ -46,17 +46,23 @@
         </div>
         <div>
             <div class="buttons-content">
-                <h2>Acciones Administrativas</h2>
+                <h2>Acciones Administrativas</h2><br>
                 <div class="button-container">
-                    <button class="button-content" onclick="redirectToAdminUsers(event)"><strong>Administrar usuarios</strong></button><br><br>
+                    <button class="button-content" onclick="redirectToAdminUsers(event)"><strong>Administrar usuarios</strong></button>
                     <button class="button-content" onclick="redirectToAsignSchedule(event)"><strong>Asignar horarios</strong></button><br><br>
-                    <button class="button-content" onclick="redirectToAsignGroup(event)"><strong>Asignar grupos a maestros</strong></button><br><br>
-                    <p class="p_instrucciones">Acciones para fin de cuatrimestre:</p><br>
+                    <button class="button-content" onclick="redirectToAsignGroup(event)"><strong>Asignar grupos</strong></button>
+                    <button class="button-content" onclick=""><strong>Agregar grupos</strong></button><br><br>
+                    <button class="button-content" onclick=""><strong>Agregar alumnos a grupos</strong></button>
+                    <button class="button-content" onclick=""><strong>Agregar unidades académicas</strong></button><br><br>
+                    <button class="button-content" onclick=""><strong>Agregar carreras</strong></button>
+                    <button class="button-content" onclick=""><strong>Agregar materias</strong></button><br><br>
+                    <button class="button-content" onclick=""><strong>Agregar grupos</strong></button>
+                    <p class="p_instrucciones">Acciones para fin de cuatrimestre:</p>
                     <form id="deleteForm" action="main_admin.php" method="POST">
-                        <button type="submit" class="button-content" name="borrar_grupos_asignados"><strong>Eliminar grupos asignados a los maestros</strong></button>
+                        <button type="submit" style="width: 300px;" class="button-content" name="borrar_grupos_asignados"><strong>Eliminar grupos asignados a los maestros</strong></button>
                     </form><br>
                     <form id="updateForm" action="main_admin.php" method="POST">
-                        <button type="submit" class="button-content" name="actualizar_grado"><strong>Actualizar grado de los grupos</strong></button><br><br>
+                        <button type="submit" style="width: 300px;" class="button-content" name="actualizar_grado"><strong>Actualizar grado de los grupos</strong></button><br><br><br><br>
                     </form>
                 </div>
                 

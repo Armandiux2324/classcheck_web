@@ -9,16 +9,19 @@
     <script src="../../scripts/index_script.js"></script>
     <script src="../../scripts/main_script.js"></script>
     <script src="../../scripts/admin_script.js"></script>
+    <?php
+    require ('../../php/php_admin/conf_pass_update.php');
+    ?>
 </head>
 <body>
     <div class="login-container">
         <header>ClassCheck</header>
         <p id="continuar">Para confirmar su identidad, ingrese su contraseña:</p>
-        <form id="loginForm" method="POST" onsubmit="redirectToSearchUser(event)">
+        <form id="loginForm" method="POST">
             <p>Contraseña:</p>
-            <input type="password" class="login-input" id="password" placeholder="Contraseña" required>
+            <input type="password" class="login-input" id="password" name="password" placeholder="Contraseña" required>
             <p>Confirmar contraseña:</p>
-            <input type="password" class="login-input" id="conf_password" placeholder="Confirmar Contraseña" required>
+            <input type="password" class="login-input" id="conf_password" name="conf_password" placeholder="Confirmar Contraseña" required>
             <button type="submit" class="login-button"><strong>Confirmar</strong></button>
         </form>
     </div>

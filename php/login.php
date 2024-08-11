@@ -30,16 +30,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: ui_administrador/main_admin.php");
                 exit();
             }
+            else if($user['role'] === 'maestro'){
+                $_SESSION['maestro_id'] = $user['id'];
+                $_SESSION['maestro_nombre'] = $user['nombre_maestro'];
 
-            // Redirigir según el rol
-            switch ($user['role']) {
-                case 'alumno':
-                    echo '<script>alert("El usuario ingresado es un alumno, inicie sesión en su teléfono.");</script>';
-                    break;
-                case 'maestro':
-                    header("Location: ui_maestro/main_maestro.php");
-                    exit();
+                // Redirigir a la página de perfil del administrador
+                header("Location: ui_maestro/main_maestro.php");
+                exit();
             }
+            else{
+                echo '<script>alert("El usuario ingresado es un alumno, inicie sesión en su teléfono.");</script>';
+            }
+
         } else {
             echo "<script>alert('Contraseña incorrecta.');</script>";
         }
