@@ -9,6 +9,38 @@
     <script src="../../scripts/index_script.js"></script>
     <script src="../../scripts/main_script.js"></script>
     <script src="../../scripts/admin_script.js"></script>
+    <?php
+    // Código de conexión a la base de datos
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_admin/update_users.php';
+    $conn = new mysqli($hostname, $username, $password, $db);
+
+    if ($conn->connect_error) {
+        die("Error al conectarse a la DB: " . $conn->connect_error);
+    }
+
+    // Obtener el nombre de usuario desde el parámetro GET
+    $username = isset($_GET['user']) ? $_GET['user'] : '';
+
+    if (!empty($username)) {
+        // Consulta para obtener los datos del alumno
+        $query = "SELECT * FROM alumno WHERE username_alumno = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        // Consulta para obtener los datos del usuario
+        $query2 = "SELECT * FROM users WHERE username = ?";
+        $stmt2 = $conn->prepare($query2);
+        $stmt2->bind_param("s", $username);
+        $stmt2->execute();
+        $result2 = $stmt2->get_result();
+
+    } else {
+        echo "Usuario no seleccionado.";
+        exit;
+    }
+    ?>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -31,62 +63,48 @@
         </div>
         <div class="buttons-content">     
             <br><h1>Modificar Usuario</h1>
-            <form id="registrationForm">
+            <form id="registrationForm" method="POST">
                 <!-- Formulario para Estudiante -->
-                <div id="studentForm">
+                    
                     <br><h2>Modificar estudiante</h2><br>
-                    <div>
-                        <label for="matricula">Matrícula (nombre de usuario):</label><br>
-                        <input type="text" id="matricula" class="campo-form" required>
+                    <?php
+                    if ($result->num_rows === 1 && $result2->num_rows === 1) { // Verifica si ambos resultados tienen una fila
+                        $row = $result->fetch_assoc();
+                        $row2 = $result2->fetch_assoc();
+                    ?>
+                        <div>
+                            <label for="matricula">Matrícula (nombre de usuario):</label><br>
+                            <input type="text" id="matricula" class="campo-form" name="matricula" value="<?php echo htmlspecialchars($row['username_alumno']); ?>" pattern="[0-9]{9}">
+                        </div>
+                        <div>
+                            <label for="nombre_estudiante">Nombre:</label><br>
+                            <input type="text" id="nombre_estudiante" class="campo-form" name="nombre_estudiante" value="<?php echo htmlspecialchars($row['nombre_alumno']); ?>" pattern="[A-Za-zÀ-ÿ\s]+">
+                        </div>
+                        <div>
+                            <label for="APaterno_estudiante">Apellido Paterno:</label><br>
+                            <input type="text" id="APaterno_estudiante" class="campo-form" name="APaterno_estudiante" value="<?php echo htmlspecialchars($row['apaterno_alumno']); ?>" pattern="[A-Za-zÀ-ÿ\s]+">
+                        </div>
+                        <div>
+                            <label for="AMaterno_estudiante">Apellido Materno:</label><br>
+                            <input type="text" id="AMaterno_estudiante" class="campo-form" name="AMaterno_estudiante" value="<?php echo htmlspecialchars($row['amaterno_alumno']); ?>" pattern="[A-Za-zÀ-ÿ\s]+">
+                        </div>
+                        <div>
+                            <label for="contraseña_estudiante">Contraseña:</label><br>
+                            <input type="text" id="contraseña_estudiante" class="campo-form" name="password_estudiante" value="<?php echo htmlspecialchars($row2['password_hash']); ?>">
+                        </div>
+                        <input type="hidden" value="<?php echo htmlspecialchars($row2['id']); ?>" name="id_user">
+                        <button type="submit" class="button-content" name="updateAlumno"><strong>Guardar cambios</strong></button><br><br><br><br>
                     </div>
-                    <div>
-                        <label for="nombre_estudiante">Nombre:</label><br>
-                        <input type="text" id="nombre_estudiante" class="campo-form" required>
-                    </div>
-                    <div>
-                        <label for="APaterno_estudiante">Apellido Paterno:</label><br>
-                        <input type="text" id="APaterno_estudiante" class="campo-form" required>
-                    </div>
-                    <div>
-                        <label for="AMaterno_estudiante">Apellido Paterno:</label><br>
-                        <input type="text" id="AMaterno_estudiante" class="campo-form" required>
-                    </div>
-                    <div>
-                        <label for="contraseña_estudiante">Contraseña:</label><br>
-                        <input type="password" id="contraseña_estudiante" class="campo-form" required>
-                    </div>
-                    <div>
-                        <label for="unidadAcademica_estudiante">Unidad Académica:</label><br>
-                        <select id="unidadAcademica_estudiante" class="campo-form" required>
-                            <option value="UTZAC">UTZAC</option>
-                            <option value="U.A. de Pinos">U.A. de Pinos</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="carrera">Carrera:</label><br>
-                        <select id="carrera" class="campo-form" required>
-                            <option value="Desarrollo de software">Desarrolllo de software</option>
-                            <option value="Minas">Minas</option>
-                            <option value="Fisioterapia">Fisioterapia</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="grado">Grado:</label><br>
-                        <select id="grado" class="campo-form" required>
-                            <option value="3ro">3ro</option>
-                            <option value="5to">5to</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="grupo">Grupo:</label><br>
-                        <select id="grupo" class="campo-form" required>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="button-content" onclick="modifyUser(event)"><strong>Guardar cambios</strong></button><br><br><br><br>
-                </div>
-            </form>
+                </form>
+                <?php
+                } else {
+                    header("Location: ../../ui_administrador/ModificarUsuarios/ModificarUsuarios_buscar.php");
+                }
+
+                $stmt->close();
+                $stmt2->close();
+                $conn->close();
+                ?>
         </div>
     </main>
     <footer>&copy; 2024 ClassCheck</footer>

@@ -105,7 +105,7 @@
             <br><div id="adminForm" name="adminForm" class="hidden">
                 <h2>Formulario para Administrador</h2>
                 <div>
-                    <label for="username_admin">Nombre de usuario (Libre):</label><br>
+                    <label for="username_admin">Nombre de usuario ():</label><br>
                     <input type="text" id="username_admin" name="username_admin" class="campo-form">
                 </div>
                 <div>

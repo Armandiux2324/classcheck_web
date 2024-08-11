@@ -9,6 +9,38 @@
     <script src="../../scripts/index_script.js"></script>
     <script src="../../scripts/main_script.js"></script>
     <script src="../../scripts/admin_script.js"></script>
+    <?php
+    // Código de conexión a la base de datos
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_admin/update_users.php';
+    $conn = new mysqli($hostname, $username, $password, $db);
+
+    if ($conn->connect_error) {
+        die("Error al conectarse a la DB: " . $conn->connect_error);
+    }
+
+    // Obtener el nombre de usuario desde el parámetro GET
+    $username = isset($_GET['user']) ? $_GET['user'] : '';
+
+    if (!empty($username)) {
+        // Consulta para obtener los datos del maestro
+        $query = "SELECT * FROM maestro WHERE username_maestro = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        // Consulta para obtener los datos del usuario
+        $query2 = "SELECT * FROM users WHERE username = ?";
+        $stmt2 = $conn->prepare($query2);
+        $stmt2->bind_param("s", $username);
+        $stmt2->execute();
+        $result2 = $stmt2->get_result();
+
+    } else {
+        echo "Usuario no seleccionado.";
+        exit;
+    }
+    ?>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -29,36 +61,53 @@
                 </div>
             </div>
         </div>
-        <!-- Formulario para Maestro -->
-        <div class="buttons-content">
-        <br><div id="teacherForm"><br>
-            <h2>Modificar maestro</h2><br>
-            <div>
-                <label for="nombre_maestro">Nombre:</label><br>
-                <input type="text" id="nombre_maestro" class="campo-form" required>
+        <div class="buttons-content">     
+            <br><h1>Modificar Usuario</h1>
+            <form id="registrationForm" method="POST">
+                <!-- Formulario para maestro -->
+            
+                <br><h2>Modificar maestro</h2><br>
+                <?php
+                        if ($result->num_rows === 1 && $result2->num_rows === 1) { // Verifica si ambos resultados tienen una fila
+                            $row = $result->fetch_assoc();
+                            $row2 = $result2->fetch_assoc();
+                        ?>
+                            <div>
+                                <label for="username_maestro">Nombre de usuario (Primeros 10 caracteres de la CURP):</label><br>
+                                <input type="text" id="username_maestro" class="campo-form" name="username_maestro" value="<?php echo htmlspecialchars($row['username_maestro']); ?>" pattern="[A-Z][AEIOU][A-Z][A-Z][0-9]{2}[0-9]{2}[0-9]{2}">
+                            </div>
+                            <div>
+                                <label for="nombre_maestro">Nombre:</label><br>
+                                <input type="text" id="nombre_maestro" class="campo-form" name="nombre_maestro" value="<?php echo htmlspecialchars($row['nombre_maestro']); ?>" pattern="[A-Za-zÀ-ÿ\s]+">
+                            </div>
+                            <div>
+                                <label for="APaterno_maestro">Apellido Paterno:</label><br>
+                                <input type="text" id="APaterno_maestro" class="campo-form" name="APaterno_maestro" value="<?php echo htmlspecialchars($row['apaterno_maestro']); ?>" pattern="[A-Za-zÀ-ÿ\s]+">
+                            </div>
+                            <div>
+                                <label for="AMaterno_maestro">Apellido Materno:</label><br>
+                                <input type="text" id="AMaterno_maestro" class="campo-form" name="AMaterno_maestro" value="<?php echo htmlspecialchars($row['amaterno_maestro']); ?>" pattern="[A-Za-zÀ-ÿ\s]+">
+                            </div>
+                            <div>
+                                <label for="contraseña_maestro">Contraseña:</label><br>
+                                <input type="text" id="contraseña_maestro" class="campo-form" name="password_maestro" value="<?php echo htmlspecialchars($row2['password_hash']); ?>">
+                            </div>
+                            <input type="hidden" value="<?php echo htmlspecialchars($row2['id']); ?>" name="id_user_maestro">
+                            <input type="hidden" value="<?php echo htmlspecialchars($row['id_maestro']); ?>" name="id_maestro">
+                            <button type="submit" class="button-content" name="updateMaestro"><strong>Guardar cambios</strong></button><br><br><br><br>
+                        </div>
+                    </form>
+                    <?php
+                    } else {
+                        header("Location: ../../ui_administrador/ModificarUsuarios/ModificarUsuarios_buscar.php");
+                    }
+
+                    $stmt->close();
+                    $stmt2->close();
+                    $conn->close();
+                    ?>
             </div>
-            <div>
-                <label for="APaterno_maestro">Apellido Materno:</label><br>
-                <input type="text" id="APaterno_maestro" class="campo-form" required>
-            </div>
-            <div>
-                <label for="AMaterno_maestro">Apellido Paterno:</label><br>
-                <input type="text" id="AMaterno_maestro" class="campo-form" required>
-            </div>
-            <div>
-                <label for="contraseña_maestro">Contraseña:</label><br>
-                <input type="password" id="contraseña_maestro" class="campo-form" required>
-            </div>
-            <div>
-                <label for="unidadAcademica_maestro">Unidad Académica:</label><br>
-                <select id="unidadAcademica_maestro" class="campo-form" required>
-                    <option value="UTZAC">UTZAC</option>
-                    <option value="U.A. de Pinos">U.A. de Pinos</option>
-                </select>
-            </div>
-            <button type="submit" class="button-content" onclick="modifyUser(event)"><strong>Guardar cambios</strong></button><br><br><br>
         </div>
-    </div>
     </main>
     <footer>&copy; 2024 ClassCheck</footer>
 </body>

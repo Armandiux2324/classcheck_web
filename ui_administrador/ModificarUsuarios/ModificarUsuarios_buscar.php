@@ -44,25 +44,25 @@
         $stmt->bind_param("s", $selected_user);
         $stmt->execute();
         $result_role = $stmt->get_result();
-
+    
         if ($result_role->num_rows > 0) {
             $row = $result_role->fetch_assoc();
             $role = $row['role'];
-
-            // Redirigir según el rol
+    
+            // Redirigir según el rol, y pasar el usuario seleccionado como un parámetro GET
             if ($role === 'administrador') {
-                header("Location: ./ModificarUsuariosAdmin.php");
+                header("Location: ./ModificarUsuariosAdmin.php?user=" . urlencode($selected_user));
                 exit;
             } elseif ($role === 'maestro') {
-                header("Location: ./ModificarUsuariosMaestro.php");
+                header("Location: ./ModificarUsuariosMaestro.php?user=" . urlencode($selected_user));
                 exit;
-            }
-            elseif ($role === 'alumno') {
-                header("Location: ./ModificarUsuariosEstudiante.php");
+            } else {
+                header("Location: ./ModificarUsuariosEstudiante.php?user=" . urlencode($selected_user));
                 exit;
             }
         }
     }
+    
     
     ?>
 </head>
@@ -95,14 +95,18 @@
                     <button type="submit" id="button-buscar" class="login-button" name="button_buscar"><strong>Buscar</strong></button>
                     <ul id="userList" class="user-list">
                     <?php
-                        if ($result && $result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<li><button class="button-content" name="selected_user" value="' . htmlspecialchars($row['username']) . '">' . htmlspecialchars($row['username']) . '</button></li>';
-                            }
-                        } elseif (isset($_POST['button_buscar'])) {
-                            echo '<li>Sin resultados de búsqueda</li>';
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<li><form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF']) . '">';
+                            echo '<input type="hidden" name="selected_user" value="' . htmlspecialchars($row['username']) . '">';
+                            echo '<button type="submit" class="button-content">' . htmlspecialchars($row['username']) . '</button>';
+                            echo '</form></li>';
                         }
+                    } elseif (isset($_POST['button_buscar'])) {
+                        echo '<li>Sin resultados de búsqueda</li>';
+                    }
                     ?>
+
                     </ul>
                 </form>
             </div>
