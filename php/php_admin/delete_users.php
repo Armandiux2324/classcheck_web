@@ -79,13 +79,15 @@ if (isset($_GET['confirmar_eliminacion']) && $_GET['confirmar_eliminacion'] == 1
         if ($stmt->affected_rows > 0) {
             echo "<script>
                     alert('Se ha eliminado el usuario.');
-                    window.location.reload();
                   </script>";
         } else {
             echo "No se encontró el usuario o no se pudo eliminar.";
         }
     } else {
-        echo "<a href='../../ui_administrador/BorrarUsuarios/BorrarUsuarios_buscar.php'> Ir a la página anterior</a>";
+        echo "<script>
+                    alert('Se ha eliminado el usuario.');
+                    window.location.href = '/classcheck_web/ui_admin/BorrarUsuarios/BorrarUsuarios_buscar.php';
+                  </script>";
     }
 
     $stmt->close();

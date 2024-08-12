@@ -9,6 +9,19 @@
     <link rel="stylesheet" href="../../css/index_style.css">
     <script src="../../scripts/index_script.js"></script>
     <script src="../../scripts/admin_script.js"></script>
+    <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_admin/subir_horario_maestro.php';
+    $conn = new mysqli($hostname, $username, $password, $db);
+
+    if ($conn->connect_error) {
+        die("Error al conectarse a la DB: " . $conn->connect_error);
+    }
+
+    // Consulta para obtener los datos de la tabla maestro
+    $query_maestro = "SELECT id_maestro, nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro";
+    $result_maestro = $conn->query($query_maestro);
+
+    ?>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -32,17 +45,28 @@
         </div>
         <div>
             <div class="buttons-content">
-                    <h2>Seleccione al maestro para cargar su horario</h2>
-                    <select id="selectMaestro" class="campo-form" style="font-size: 18px;">
-                        <option value="maestro1">Maestro 1</option>
-                        <option value="maestro2">Maestro 2</option>
-                        <option value="maestro3">Maestro 3</option>
+                <h2>Seleccione al maestro para cargar su horario</h2>
+                <form method="post" enctype="multipart/form-data">
+                    <select id="selectMaestro" name="selectMaestro" class="campo-form" style="font-size: 18px;">
+                        <?php
+                            // Generar las opciones dinámicamente
+                            if ($result_maestro->num_rows > 0) {
+                                while($row = $result_maestro->fetch_assoc()) {
+                                    $nombreCompleto = htmlspecialchars($row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro']);
+                                    $idMaestro = htmlspecialchars($row['id_maestro']);
+                                    echo '<option value="' . $idMaestro . '">' . $nombreCompleto . '</option>';
+                                }
+                            } else {
+                                echo '<option value="">No hay maestros disponibles</option>';
+                            }
+                        ?>
                     </select>
                     <br>
                     <p class="p_instrucciones">Seleccione el horario:</p>
-                    <input type="file" id="uploadPDF" accept=".pdf" class="login-input">
+                    <input type="file" id="uploadPDF" name="uploadPDF" accept=".pdf" class="login-input">
                     <br>
-                    <button class="button-content" onclick="uploadSchedule(event)"><strong>Subir horario</strong></button>
+                    <button type="submit" name="submit" class="button-content"><strong>Subir horario</strong></button>
+                </form>
             </div>
         </div>
     </main>

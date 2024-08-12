@@ -10,10 +10,6 @@
     <script src="../scripts/admin_script.js"></script>
     <?php
     require_once ('../php/php_admin/insert_usuarios.php');
-
-    $query_ua_maestro = "SELECT nombre_ua FROM unidad_academica";
-    $result_ua_maestro = $conn->query($query_ua_maestro);
-
     ?>
 </head>
 <body>
