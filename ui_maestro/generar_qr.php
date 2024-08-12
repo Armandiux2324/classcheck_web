@@ -8,6 +8,14 @@
     <link rel="stylesheet" type="text/css" href="../css/main_style.css">
     <script src="../scripts/main_script.js"></script>
     <script src="../scripts/maestro_script.js"></script>
+    <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_maestro/generate_qr.php';
+    $conn = new mysqli($hostname, $username, $password, $db);
+
+    if ($conn->connect_error) {
+        die("Error al conectarse a la DB: " . $conn->connect_error);
+    }
+    ?>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -42,7 +50,7 @@
                     <br><button type="submit" class="button-content"><strong>Generar QR</strong></button><br>
                 </form>
                 <div id="qr">
-                    <?php if (isset($filename)) { echo "<img src='$filename' alt='Código QR' />"; } ?>
+                    <?php if (isset($filename)) { echo "<img src='/classcheck_github/archivos/qr/$filename' alt='Código QR' />"; } ?>
                 </div>
         </div>
     </main>
