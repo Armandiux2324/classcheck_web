@@ -8,14 +8,9 @@
     <link rel="stylesheet" href="../css/main_style.css">
     <script src="../scripts/admin_script.js"></script>
     <?php
-        require_once ('../php/php_admin/fin_cuatri.php');
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_admin/fin_cuatri.php';
         session_start();
 
-        // Verificar si el usuario ha iniciado sesión como administrador
-        if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'administrador') {
-            header("Location: ../login.php");
-            exit();
-        }
 
         // Obtener la información del administrador de la sesión
         $admin_id = $_SESSION['admin_id'];

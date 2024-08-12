@@ -34,15 +34,16 @@
             <div class="buttons_list">
                 <h3 class="section_title">Generar QR de asistencia</h3>
                 <p class="p_instrucciones">Ingrese el lapso de tiempo de validez del QR:</p>
-                <h3>Hora de inicio:</h3>
-                <input type="time" placeholder="Hora de inicio" id="hora_inicio" class="hora-qr" required>
-                <h3>Hora de fin:</h3>
-                <input type="time" placeholder="Hora de fin" id="hora_fin" class="hora-qr" required>
-                <br><button class="button-content" onclick="showQR()"><strong>Generar qr</strong></button><br>
-            </div>
-            <div id="qr" class="hidden qr">
-                El código QR se mostrará aquí
-            </div><br><br><br><br><br>
+                <form action="generar_qr.php" method="post">
+                    <h3>Hora de inicio:</h3>
+                    <input type="time" id="hora_inicio" name="hora_inicio" class="hora-qr" required>
+                    <h3>Hora de fin:</h3>
+                    <input type="time" id="hora_fin" name="hora_fin" class="hora-qr" required>
+                    <br><button type="submit" class="button-content"><strong>Generar QR</strong></button><br>
+                </form>
+                <div id="qr">
+                    <?php if (isset($filename)) { echo "<img src='$filename' alt='Código QR' />"; } ?>
+                </div>
         </div>
     </main>
     <footer>&copy; 2024 ClassCheck</footer>

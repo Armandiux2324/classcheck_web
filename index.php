@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index_style.css">
     <?php 
-    require_once ('php/login.php');
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/login.php';
     ?>
     <script src="scripts/index_script.js"></script>
 </head>

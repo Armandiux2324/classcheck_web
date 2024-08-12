@@ -61,7 +61,6 @@ alter table grupos add constraint fk_g_c foreign key (carrera_id) references car
 
 alter table alumno add column grupo_id int;
 
-alter table alumno add constraint fk_g_a foreign key (grupo_id) references grupos(id);
 
 alter table grupos add column uacademica_id int;
 
@@ -76,3 +75,16 @@ alter table materias add constraint fk_materias_maestro foreign key (maestro_id)
 alter table materias add constraint fk_materias_grupo foreign key (grupo_id) references grupos(id);
 
 alter table observaciones add constraint fk_observaciones_materia foreign key (materia_id) references materias(id);
+
+alter table administrador add column username_admin varchar(100);
+
+alter table maestro add column username varchar(100);
+
+alter table alumno add column username varchar(100);
+
+alter table carreras add column id_ua int;
+
+alter table carreras add constraint fk_c_ua foreign key (id_ua) references unidad_academica(id_ua);
+
+alter table asistencias add column hora_inicio time;
+alter table asistencias add column hora_fin time;

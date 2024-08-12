@@ -6,8 +6,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    // Verificar si la conexión a la base de datos es exitosa
+    if ($conn->connect_error) {
+        die("Error en la conexión a la base de datos: " . $conn->connect_error);
+    }
+
+    // Consulta para obtener el usuario
     $query = "SELECT * FROM users WHERE username = ?";
     $stmt = $conn->prepare($query);
+
+    if ($stmt === false) {
+        die("Error al preparar la consulta: " . $conn->error);
+    }
+
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -16,29 +27,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
 
         // Verificar la contraseña
-        if ($password == $user['password_hash']) {
+        if ($password == $user['password_hash']) {  
             // Autenticación exitosa
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $user['role'];
 
             // Guardar ID y nombre en sesión si es administrador
             if ($user['role'] === 'administrador') {
-                $_SESSION['admin_id'] = $user['id'];
+                $_SESSION['admin_id'] = $user['id_admin'];
                 $_SESSION['admin_nombre'] = $user['nombre_admin'];
 
                 // Redirigir a la página de perfil del administrador
-                header("Location: ui_administrador/main_admin.php");
+                header("Location: /classcheck_github/ui_administrador/main_admin.php");
                 exit();
-            }
+            } 
             else if($user['role'] === 'maestro'){
-                $_SESSION['maestro_id'] = $user['id'];
+                $_SESSION['maestro_id'] = $user['id_maestro'];
                 $_SESSION['maestro_nombre'] = $user['nombre_maestro'];
 
-                // Redirigir a la página de perfil del administrador
+                // Redirigir a la página de perfil del maestro
                 header("Location: ui_maestro/main_maestro.php");
                 exit();
-            }
-            else{
+            } 
+            else {
                 echo '<script>alert("El usuario ingresado es un alumno, inicie sesión en su teléfono.");</script>';
             }
 
@@ -54,4 +65,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
-

@@ -8,7 +8,20 @@
     <link rel="stylesheet" href="../../css/main_style.css">
     <link rel="stylesheet" href="../../css/index_style.css">
     <script src="../../scripts/index_script.js"></script>
-    <script src="../../scripts/admin_script.js"></script>    
+    <script src="../../scripts/admin_script.js"></script>  
+    <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_admin/asignar_grupos/asignar_grupo_clases.php';
+    $conn = new mysqli($hostname, $username, $password, $db);
+
+    if ($conn->connect_error) {
+        die("Error al conectarse a la DB: " . $conn->connect_error);
+    }
+
+    // Consulta para obtener los datos de la tabla maestro
+    $query_maestro = "SELECT id_maestro, nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro";
+    $result_maestro = $conn->query($query_maestro);
+
+    ?>  
 </head>
 <body>
     <header>ClassCheck</header>
