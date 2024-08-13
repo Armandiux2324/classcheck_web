@@ -52,7 +52,7 @@
         <div class="content">
             <div class="buttons_list">
                 <h3 class="section_title">Generar QR de asistencia</h3>
-                <p class="p_instrucciones">Seleccione el grupo</p>
+                <p class="p_instrucciones">Seleccione la materia y posteriormente el grupo</p>
                 <?php
                 if ($result_materias->num_rows > 0) {
                     while($materia = $result_materias->fetch_assoc()) {
@@ -60,7 +60,7 @@
                         $nombre_materia = htmlspecialchars($materia['nombre_materia']);
 
                         echo '<div class="materia">';
-                        echo '<button class="materia-button" onclick="toggleGrupos(\'grupo' . $materia_id . '\')">' . $nombre_materia . ' ▼</button>';
+                        echo '<button class="materia-button" style="margin: -10px;" onclick="toggleGrupos(\'grupo' . $materia_id . '\')">' . $nombre_materia . ' ▼</button>';
                         echo '<div id="grupo' . $materia_id . '" class="grupo-container">';
 
                         // Obtener los grupos asociados a la materia actual

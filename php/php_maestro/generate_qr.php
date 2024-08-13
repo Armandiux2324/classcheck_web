@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $grupo_id = $_SESSION['grupo_id'];  // Tomado de la sesión
 
     // Generar el contenido del QR.
-    $qrContent = "Grupo: $grupo_id | Hora de inicio: $hora_inicio | Hora de fin: $hora_fin";
+    $qrContent = "grupo_id:$grupo_id;hora_inicio:$hora_inicio;hora_fin:$hora_fin";
 
     // Definir el nombre del archivo y la ruta completa donde se guardará.
     $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/archivos/qr/';

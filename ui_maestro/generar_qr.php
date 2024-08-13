@@ -47,7 +47,7 @@
                     <input type="time" id="hora_inicio" name="hora_inicio" class="hora-qr" required>
                     <h3>Hora de fin:</h3>
                     <input type="time" id="hora_fin" name="hora_fin" class="hora-qr" required>
-                    <br><button type="submit" class="button-content"><strong>Generar QR</strong></button><br>
+                    <br><button type="submit" class="button-content"><strong>Generar QR</strong></button><br><br>
                 </form>
                 <div id="qr">
                     <?php if (isset($filename)) { echo "<img src='/classcheck_github/archivos/qr/$filename' alt='Código QR' />"; } ?>

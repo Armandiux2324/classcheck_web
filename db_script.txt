@@ -4,12 +4,6 @@ CREATE TABLE unidad_academica (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombre_ua VARCHAR(100) NOT NULL);
 
-CREATE TABLE grupo_tutorado (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    nombre_grupo_tutorado VARCHAR(5) NOT NULL,
-    maestro_id INT NOT NULL,
-    FOREIGN KEY (maestro_id) REFERENCES maestro(id));
-
 alter table maestro add constraint fk_m_ua foreign key (unidad_academica_id) references unidad_academica(id)
 
 CREATE TABLE grupos (
@@ -66,7 +60,7 @@ alter table grupos add column uacademica_id int;
 
 alter table grupos add constraint fk_g_ua foreign key (uacademica_id) references unidad_academica(id);
 
-create table observaciones(id int primary key, matricula_alumno int, materia_id int, observacion varchar(100));
+create table observaciones(matricula_alumno int, materia_id int, observacion varchar(100), fecha_observacion DATETIME DEFAULT CURRENT_TIMESTAMP, primary key(matricula_alumno, materia_id));
 
 create table materias(id int primary key, maestro_id int, grupo_id int, nombre_materia varchar(50));
 
@@ -74,7 +68,9 @@ alter table materias add constraint fk_materias_maestro foreign key (maestro_id)
 
 alter table materias add constraint fk_materias_grupo foreign key (grupo_id) references grupos(id);
 
-alter table observaciones add constraint fk_observaciones_materia foreign key (materia_id) references materias(id);
+alter table observaciones add constraint fk_observaciones_materia foreign key (materia_id) references materias(id_materia);
+
+alter table observaciones add constraint fk_observaciones_alumno foreign key (matricula_alumno) references alumno(matricula);
 
 alter table administrador add column username_admin varchar(100);
 
@@ -88,3 +84,13 @@ alter table carreras add constraint fk_c_ua foreign key (id_ua) references unida
 
 alter table asistencias add column hora_inicio time;
 alter table asistencias add column hora_fin time;
+
+alter table materias add column username_maestro varchar(100);
+
+alter table grupo_tutorado add constraint foreign key (grupo_id) REFERENCES grupos(id_grupo);
+
+create table grupo_tutorado(maestro_id int, grupo_id int, primary key(maestro_id, grupo_id));
+
+alter table grupo_tutorado add constraint fk_gt_m foreign key(maestro_id) REFERENCES maestro(id_maestro);
+
+alter table grupo_tutorado add constraint fk_gt_g foreign key (grupo_id) REFERENCES grupos(id_grupo);

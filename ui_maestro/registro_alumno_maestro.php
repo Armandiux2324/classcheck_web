@@ -27,7 +27,6 @@
                     <p>xxxxxx</p><br>
                     <h3>Unidad académica</h3>
                     <p>xxxxxxx</p><br>
-                    <button class="chpass_button" id="modif_pass" onclick="redirectToConfPass(event)"><strong>Modificar contraseña</strong></button>
                 </div>
             </div>
         </div>

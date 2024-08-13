@@ -8,6 +8,25 @@
     <link rel="stylesheet" type="text/css" href="../css/main_style.css">
     <script src="../scripts/maestro_script.js"></script>
     <script src="../scripts/main_script.js"></script>
+    <?php
+    session_start();
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/conn_db.php';
+    $conn = new mysqli($hostname, $username, $password, $db);
+
+    if ($conn->connect_error) {
+        die("Error al conectarse a la DB: " . $conn->connect_error);
+    }
+
+    $maestro_id = $_SESSION['maestro_id']; 
+    $username_maestro = $_SESSION['username']; 
+
+    // Consulta para obtener las materias asociadas al maestro
+    $query_materias = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
+    $stmt = $conn->prepare($query_materias);
+    $stmt->bind_param("i", $username_maestro);
+    $stmt->execute();
+    $result_materias = $stmt->get_result();
+    ?>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -24,9 +43,7 @@
                     <h1>Perfil de usuario</h1>
                     <div class="pfp"></div>
                     <h3>Nombre:</h3>
-                    <p>xxxxxx</p><br>
-                    <h3>Unidad académica:</h3>
-                    <p>xxxxxxx</p><br>
+                    <p><?php echo htmlspecialchars($username_maestro); ?></p><br>
                     <button class="chpass_button" id="modif_pass" onclick="redirectToConfPass(event)"><strong>Modificar contraseña</strong></button>
                 </div>
             </div>

@@ -32,21 +32,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $user['role'];
 
-            // Guardar ID y nombre en sesión si es administrador
             if ($user['role'] === 'administrador') {
-                $_SESSION['admin_id'] = $user['id_admin'];
-                $_SESSION['admin_nombre'] = $user['nombre_admin'];
+                $_SESSION['username'] = $user['username'];
+
+                // Consulta para obtener el nombre completo del administrador
+                $query_admin = "SELECT nombre FROM administrador WHERE username_admin = ?";
+                $stmt_admin = $conn->prepare($query_admin);
+                $stmt_admin->bind_param("i", $_SESSION['username']);
+                $stmt_admin->execute();
+                $result_admin = $stmt_admin->get_result();
+                
+                if ($result_admin->num_rows === 1) {
+                    $admin = $result_admin->fetch_assoc();
+                    $_SESSION['admin_nombre'] = $admin['nombre_admin'];
+                }
 
                 // Redirigir a la página de perfil del administrador
                 header("Location: /classcheck_github/ui_administrador/main_admin.php");
                 exit();
             } 
-            else if($user['role'] === 'maestro'){
-                $_SESSION['maestro_id'] = $user['id_maestro'];
-                $_SESSION['maestro_nombre'] = $user['nombre_maestro'];
+            else if ($user['role'] === 'maestro') {
+                // Consulta para obtener el nombre completo del maestro
+                $query_maestro = "SELECT nombre_maestro FROM maestro WHERE username_maestro = ?";
+                $stmt_maestro = $conn->prepare($query_maestro);
+                $stmt_maestro->bind_param("i", $_SESSION['username']);
+                $stmt_maestro->execute();
+                $result_maestro = $stmt_maestro->get_result();
+                
+                if ($result_maestro->num_rows === 1) {
+                    $maestro = $result_maestro->fetch_assoc();
+                    $_SESSION['maestro_nombre'] = $maestro['nombre_maestro'];
+                }
 
                 // Redirigir a la página de perfil del maestro
-                header("Location: ui_maestro/main_maestro.php");
+                header("Location: /classcheck_github/ui_maestro/main_maestro.php");
                 exit();
             } 
             else {
