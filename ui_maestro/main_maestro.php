@@ -20,12 +20,22 @@
     $maestro_id = $_SESSION['maestro_id']; 
     $username_maestro = $_SESSION['username']; 
 
-    // Consulta para obtener las materias asociadas al maestro
-    $query_materias = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
-    $stmt = $conn->prepare($query_materias);
-    $stmt->bind_param("i", $username_maestro);
+    // Consulta para obtener el nombre y apellidos del maestro
+    $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
+    $stmt = $conn->prepare($query_maestro);
+    $stmt->bind_param("s", $username_maestro); // Cambié "i" a "s" porque es un string
     $stmt->execute();
-    $result_materias = $stmt->get_result();
+    $result_maestro = $stmt->get_result();
+
+    if ($result_maestro->num_rows === 1) {
+        $row = $result_maestro->fetch_assoc();
+        $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
+    } else {
+        $nombre_completo = "Nombre no disponible";
+    }
+
+    $stmt->close();
+    $conn->close();
     ?>
 </head>
 <body>
@@ -42,8 +52,8 @@
                 <div>
                     <h1>Perfil de usuario</h1>
                     <div class="pfp"></div>
-                    <h3>Nombre:</h3>
-                    <p><?php echo htmlspecialchars($username_maestro); ?></p><br>
+                    <h3>Nombre:</h3><br>
+                    <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>
                     <button class="chpass_button" id="modif_pass" onclick="redirectToConfPass(event)"><strong>Modificar contraseña</strong></button>
                 </div>
             </div>

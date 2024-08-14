@@ -10,7 +10,7 @@
     <script src="../../scripts/main_script.js"></script>
     <script src="../../scripts/admin_script.js"></script>
     <?php
-    require ('../../php/php_admin/conf_pass_delete.php');
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_admin/conf_pass_delete.php';
     ?>
 </head>
 <body>

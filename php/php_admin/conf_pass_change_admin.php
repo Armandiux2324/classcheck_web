@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Verificar la contraseña
             if ($password == $user['password_hash']) {
-                header("Location: ../../ui_administrador/ModificarUsuarios/ModificarUsuarios_buscar.php");
+                header("Location: /classcheck_github/ui_administrador/change_pass_admin.php");
                 exit();
             } else {
                 echo "<script>alert('Contraseña incorrecta.');</script>";

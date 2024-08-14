@@ -6,12 +6,6 @@ $conn = new mysqli($hostname, $username, $password, $db);
     }
 session_start();
 
-// Verificar si el usuario ha iniciado sesión como administrador
-if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'administrador') {
-    header("Location: ../login.php");
-    exit();
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener la contraseña y confirmación de la solicitud POST
     $password = $_POST['password'];

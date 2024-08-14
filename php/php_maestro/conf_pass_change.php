@@ -6,12 +6,6 @@ $conn = new mysqli($hostname, $username, $password, $db);
     }
 session_start();
 
-// Verificar si el usuario ha iniciado sesión como administrador
-if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'maestro') {
-    header("Location: ../login.php");
-    exit();
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener la contraseña y confirmación de la solicitud POST
     $password = $_POST['password'];
@@ -35,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Verificar la contraseña
             if ($password == $user['password_hash']) {
-                header("Location: ../../ui_administrador/ModificarUsuarios/ModificarUsuarios_buscar.php");
+                header("Location: /classcheck_github/change_pass.php");
                 exit();
             } else {
                 echo "<script>alert('Contraseña incorrecta.');</script>";
