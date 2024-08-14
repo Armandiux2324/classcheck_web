@@ -65,11 +65,6 @@ function redirectToListaAlumnos(event){
     window.location.href = './lista_grupo_maestro.php';
 }
 
-//Función para que el maestro vea los registros del alumno
-function redirectToRegistroAlumno(event){
-    event.preventDefault(); // Evita el comportamiento por defecto del formulario
-    window.location.href = './registro_alumno_maestro.php';
-}
 
 //Función para guardar observaciones
 function guardarObservaciones(event){

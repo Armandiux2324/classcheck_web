@@ -18,12 +18,27 @@
     }
 
     $grupo_id = $_SESSION['grupo_id'];
+    $maestro_id = $_SESSION['maestro_id']; 
+    $username_maestro = $_SESSION['username']; 
 
     $query_alumnos = "SELECT matricula_alumno FROM grupos_alumno WHERE grupo_id = ?";
     $stmt = $conn->prepare($query_alumnos);
     $stmt->bind_param("i", $grupo_id);
     $stmt->execute();
     $result_alumnos = $stmt->get_result();
+
+    $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
+    $stmt = $conn->prepare($query_maestro);
+    $stmt->bind_param("s", $username_maestro); 
+    $stmt->execute();
+    $result_maestro = $stmt->get_result();
+
+    if ($result_maestro->num_rows === 1) {
+        $row = $result_maestro->fetch_assoc();
+        $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
+    } else {
+        $nombre_completo = "Nombre no disponible";
+    }
     ?>
 </head>
 <body>
@@ -39,10 +54,8 @@
                 <div>
                     <h1>Perfil del usuario</h1>
                     <div class="pfp"></div>
-                    <h3>Nombre:</h3>
-                    <p>xxxxxx</p><br>
-                    <h3>Unidad académica:</h3>
-                    <p>xxxxxxx</p><br>
+                    <h3>Nombre:</h3><br>
+                    <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>
                 </div>
             </div>
         </div>
@@ -54,7 +67,10 @@
                 if ($result_alumnos->num_rows > 0) {
                     while($alumno = $result_alumnos->fetch_assoc()) {
                         $matricula_alumno = htmlspecialchars($alumno['matricula_alumno']);
-                        echo '<button class="button-content" style="margin: -4px;" onclick="redirectToRegistroAlumno(event)"><strong>' . $matricula_alumno . '</strong></button><br>';
+                        echo '<form method="POST" action="/classcheck_github/php/php_maestro/set_matricula.php" style="display:inline;">
+                                <input type="hidden" name="matricula_alumno" value="' . $matricula_alumno . '">
+                                <button type="submit" class="button-content" style="margin: -4px;"><strong>' . $matricula_alumno . '</strong></button>
+                              </form><br>';
                     }
                 } else {
                     echo '<p>No hay alumnos asociados a este grupo.</p>';

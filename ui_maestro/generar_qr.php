@@ -9,12 +9,33 @@
     <script src="../scripts/main_script.js"></script>
     <script src="../scripts/maestro_script.js"></script>
     <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_maestro/generate_qr.php';
+    session_start();
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/conn_db.php';
     $conn = new mysqli($hostname, $username, $password, $db);
 
     if ($conn->connect_error) {
         die("Error al conectarse a la DB: " . $conn->connect_error);
     }
+
+    $maestro_id = $_SESSION['maestro_id']; 
+    $username_maestro = $_SESSION['username']; 
+
+    // Consulta para obtener el nombre y apellidos del maestro
+    $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
+    $stmt = $conn->prepare($query_maestro);
+    $stmt->bind_param("s", $username_maestro); // Cambié "i" a "s" porque es un string
+    $stmt->execute();
+    $result_maestro = $stmt->get_result();
+
+    if ($result_maestro->num_rows === 1) {
+        $row = $result_maestro->fetch_assoc();
+        $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
+    } else {
+        $nombre_completo = "Nombre no disponible";
+    }
+
+    $stmt->close();
+    $conn->close();
     ?>
 </head>
 <body>
@@ -30,11 +51,8 @@
                 <div>
                     <h1>Perfil del usuario</h1>
                     <div class="pfp"></div>
-                    <h3>Nombre:</h3>
-                    <p>xxxxxx</p><br>
-                    <h3>Unidad académica:</h3>
-                    <p>xxxxxxx</p><br>
-                    <button class="chpass_button" id="modif_pass" onclick="redirectToConfPass(event)"><strong>Modificar contraseña</strong></button>
+                    <h3>Nombre:</h3><br>
+                    <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>
                 </div>
             </div>
         </div>

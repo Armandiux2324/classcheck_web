@@ -26,6 +26,19 @@
     $stmt->bind_param("i", $username_maestro);
     $stmt->execute();
     $result_materias = $stmt->get_result();
+
+    $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
+    $stmt = $conn->prepare($query_maestro);
+    $stmt->bind_param("s", $username_maestro); // Cambié "i" a "s" porque es un string
+    $stmt->execute();
+    $result_maestro = $stmt->get_result();
+
+    if ($result_maestro->num_rows === 1) {
+        $row = $result_maestro->fetch_assoc();
+        $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
+    } else {
+        $nombre_completo = "Nombre no disponible";
+    }
     ?>
 </head>
 <body>
@@ -41,10 +54,8 @@
                 <div>
                     <h1>Perfil del usuario</h1>
                     <div class="pfp"></div>
-                    <h3>Nombre:</h3>
-                    <p>xxxxxx</p><br>
-                    <h3>Unidad académica:</h3>
-                    <p>xxxxxxx</p><br>
+                    <h3>Nombre:</h3><br>
+                    <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>
                 </div>
             </div>
         </div>

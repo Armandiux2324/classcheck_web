@@ -9,6 +9,35 @@
     <link rel="stylesheet" type="text/css" href="../css/main_style.css">
     <script src="../scripts/main_script.js"></script>
     <script src="../scripts/maestro_script.js"></script>
+    <?php
+
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_maestro/registros_alumno.php';
+    $conn = new mysqli($hostname, $username, $password, $db);
+
+    if ($conn->connect_error) {
+        die("Error al conectarse a la DB: " . $conn->connect_error);
+    }
+
+    $maestro_id = $_SESSION['maestro_id']; 
+    $username_maestro = $_SESSION['username']; 
+
+    // Consulta para obtener el nombre y apellidos del maestro
+    $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
+    $stmt = $conn->prepare($query_maestro);
+    $stmt->bind_param("s", $username_maestro); // Cambié "i" a "s" porque es un string
+    $stmt->execute();
+    $result_maestro = $stmt->get_result();
+
+    if ($result_maestro->num_rows === 1) {
+        $row = $result_maestro->fetch_assoc();
+        $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
+    } else {
+        $nombre_completo = "Nombre no disponible";
+    }
+
+    $stmt->close();
+    $conn->close();
+    ?>
 </head>
 <body>
     <header>ClassCheck</header>
@@ -23,10 +52,8 @@
                 <div>
                     <h1>Perfil del usuario</h1>
                     <div class="pfp"></div>
-                    <h3>Nombre:</h3>
-                    <p>xxxxxx</p><br>
-                    <h3>Unidad académica</h3>
-                    <p>xxxxxxx</p><br>
+                    <h3>Nombre:</h3><br>
+                    <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>
                 </div>
             </div>
         </div>
@@ -34,9 +61,9 @@
             <div class="buttons_list">
                 <h3 class="section_title">Consultar listas de grupo</h3><br>
                 <h3>Nombre completo:</h3>
-                <p>xxxxxx xxxxx xxxxx</p><br>
+                <p><?php echo htmlspecialchars($nombre_completo_alumno); ?></p><br>
                 <h3>Matrícula:</h3>
-                <p>xxxxxx</p>
+                <p><?php echo htmlspecialchars($matricula_alumno); ?></p>
                 <div class="calendar-container">
                     <h2>Julio 2024</h2>
                     <table class="calendar-table">
@@ -100,15 +127,17 @@
                         </tbody>
                     </table>
                 </div>
-                <h3>Cantidad de clases total:</h3>
-                <p>xxx</p><br>
+                <h3>Cantidad de asistencias:</h3>
+                <p><?php echo $cantidad_asistencias; ?></p><br>
                 <h3>Faltas totales:</h3>
-                <p>xxxxxxx</p><br>
+                <p><?php echo $cantidad_faltas; ?></p><br>
                 <h3>Porcentaje de asistencia:</h3>
-                <p>x%</p><br>
+                <p><?php echo round($porcentaje_asistencia, 2); ?>%</p><br>
                 <h3>Agregar observaciones del alumno:</h3>
-                <br><textarea name="observaciones" id="observaciones" placeholder="Escriba las observaciones aquí"></textarea><br>
-                <button class="button-content" onclick="guardarObservaciones(event)"><strong>Guardar observaciones</strong></button><br><br>
+                <form method="POST">
+                    <br><textarea name="observaciones" id="observaciones" placeholder="Escriba las observaciones aquí"></textarea><br>
+                    <button type="submit" class="button-content"><strong>Guardar observaciones</strong></button><br><br><br>
+                </form>
             </div>
         </div>
     </main>
