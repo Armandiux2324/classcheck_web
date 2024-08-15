@@ -132,12 +132,15 @@
                 <h3>Faltas totales:</h3>
                 <p><?php echo $cantidad_faltas; ?></p><br>
                 <h3>Porcentaje de asistencia:</h3>
-                <p><?php echo round($porcentaje_asistencia, 2); ?>%</p><br>
-                <h3>Agregar observaciones del alumno:</h3>
+                <p><?php echo $porcentaje_asistencia; ?>%</p><br>
+                <h3>Agregar observaciones del alumno:</h3><br>
                 <form method="POST">
-                    <br><textarea name="observaciones" id="observaciones" placeholder="Escriba las observaciones aquí"></textarea><br>
+                    <input type="hidden" name="materia_id" value="<?php echo htmlspecialchars($materia_id); ?>">
+                    <input type="hidden" name="grupo_id" value="<?php echo htmlspecialchars($grupo_id); ?>">
+                    <textarea name="observaciones" id="observaciones" placeholder="Escriba las observaciones aquí:"></textarea><br>
                     <button type="submit" class="button-content"><strong>Guardar observaciones</strong></button><br><br><br>
                 </form>
+
             </div>
         </div>
     </main>

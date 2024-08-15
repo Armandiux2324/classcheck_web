@@ -84,9 +84,13 @@
                             while($grupo = $result_grupos->fetch_assoc()) {
                                 $grupo_id = htmlspecialchars($grupo['id_grupo']);
                                 $grupo_nombre = htmlspecialchars($grupo['grupo']);
-                                echo '<button class="button-content" onclick="redirectToListaAlumnos(\'' . $grupo_id . '\')"><strong>' . $grupo_nombre . '</strong></button><br>';
+                                echo '<form method="POST" action="/classcheck_github/php/php_maestro/guardar_grupo_id.php" style="display:inline;">
+                                    <input type="hidden" name="materia_id" value="' . $materia_id . '">
+                                    <input type="hidden" name="grupo_id" value="' . $grupo_id . '">
+                                    <button type="submit" class="button-content"><strong>' . $grupo_nombre . '</strong></button><br>
+                              </form><br>';
                             }
-                        }
+                        }                        
 
                         echo '</div></div>';
                     }
@@ -105,16 +109,9 @@
         grupoContainer.style.display = grupoContainer.style.display === 'none' ? 'block' : 'none';
     }
 
-    function redirectToListaAlumnos(grupoId) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/classcheck_github/php/php_maestro/guardar_grupo_id.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            window.location.href = "/classcheck_github/ui_maestro/lista_grupo_maestro.php";
-        }
-    };
-    xhr.send("grupo_id=" + grupoId);
+    function redirectToListaAlumnos(grupoId, materiaId) {
+    // Redirigir directamente a la página con los parámetros en la URL
+    window.location.href = "/classcheck_github/ui_maestro/lista_grupo_maestro.php?grupo_id=" + encodeURIComponent(grupoId) + "&materia_id=" + encodeURIComponent(materiaId);
 }
 
 </script>

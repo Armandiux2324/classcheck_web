@@ -18,6 +18,7 @@
     }
 
     $grupo_id = $_SESSION['grupo_id'];
+    $materia_id = $_SESSION['$materia_id'];
     $maestro_id = $_SESSION['maestro_id']; 
     $username_maestro = $_SESSION['username']; 
 
@@ -69,6 +70,7 @@
                         $matricula_alumno = htmlspecialchars($alumno['matricula_alumno']);
                         echo '<form method="POST" action="/classcheck_github/php/php_maestro/set_matricula.php" style="display:inline;">
                                 <input type="hidden" name="matricula_alumno" value="' . $matricula_alumno . '">
+                                <input type="hidden" name="grupo_id" value="' . $grupo_id . '">
                                 <button type="submit" class="button-content" style="margin: -4px;"><strong>' . $matricula_alumno . '</strong></button>
                               </form><br>';
                     }

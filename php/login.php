@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
 
-        // Verificar la contraseña
-        if ($password == $user['password_hash']) {  
+        // Verificar la contraseña (sin hash)
+        if ($password === $user['password_hash']) {  
             // Autenticación exitosa
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $user['role'];
@@ -41,10 +41,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: /classcheck_github/ui_administrador/main_admin.php");
                 exit();
             } 
-            else if($user['role'] === 'maestro'){
-                $_SESSION['maestro_id'] = $user['id_maestro'];
-                $_SESSION['maestro_nombre'] = $user['nombre_maestro'];
+            else if ($user['role'] === 'maestro') {
+                $query_id_maestro = "SELECT id_maestro, nombre_maestro FROM maestro WHERE username_maestro = ?";
+                $stmt2 = $conn->prepare($query_id_maestro);
 
+                if ($stmt2 === false) {
+                    die("Error al preparar la consulta: " . $conn->error);
+                }
+
+                $stmt2->bind_param("s", $username);
+                $stmt2->execute();
+                $result_id_maestro = $stmt2->get_result();
+
+                if ($result_id_maestro->num_rows === 1) {
+                    $user_maestro = $result_id_maestro->fetch_assoc();
+                    $_SESSION['maestro_id'] = $user_maestro['id_maestro'];
+                    $_SESSION['maestro_nombre'] = $user_maestro['nombre_maestro'];
+                } else {
+                    die("Error al obtener ID del maestro.");
+                }
+
+                $stmt2->close();
                 // Redirigir a la página de perfil del maestro
                 header("Location: ui_maestro/main_maestro.php");
                 exit();

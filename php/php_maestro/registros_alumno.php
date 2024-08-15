@@ -8,6 +8,8 @@ if ($conn->connect_error) {
 }
 
 $matricula_alumno = $_SESSION['matricula_alumno'] ?? null;
+$materia_id = $_SESSION['materia_id'] ?? null;
+$grupo_id = $_SESSION['grupo_id'] ?? null;
 
 // Consulta para obtener la información del alumno
 $query_alumno = "SELECT nombre_alumno, apaterno_alumno, amaterno_alumno FROM alumno WHERE matricula = ?";
@@ -69,7 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $stmt->close();
+    } else{
+        echo '<script>alert("No hay observación para guardar")</script>';
     }
 }
 
+$conn->close();
 ?>

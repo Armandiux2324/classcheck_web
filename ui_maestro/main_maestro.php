@@ -34,6 +34,20 @@
         $nombre_completo = "Nombre no disponible";
     }
 
+    $query_tutorado = "SELECT grupo_id FROM grupo_tutorado WHERE maestro_id = ?";
+    $stmt = $conn->prepare($query_tutorado);
+    $stmt->bind_param("i", $maestro_id);
+    $stmt->execute();
+    $result_tutorado = $stmt->get_result();
+
+    if ($result_tutorado->num_rows === 1) {
+        $row = $result_tutorado->fetch_assoc();
+        $grupo_id = $row['grupo_id'];
+    } else {
+        $grupo_id = null;
+    }
+
+
     $stmt->close();
     $conn->close();
     ?>
@@ -63,8 +77,7 @@
                 <h3>Acciones:</h3>
                 <button class="button-content" onclick="redirectToSelecGrupoQR(event)"><strong>Generar QR de asistencia</strong></button><br>
                 <button class="button-content" onclick="redirectToListaGrupos(event)"><strong>Consultar listas de grupos</strong></button><br>
-                <button class="button-content" onclick="redirectToRegistrosTutorado(event)"><strong>Consultar registros de grupo tutorado</strong></button><br>
-            </div>
+                <button class="button-content" onclick="handleRedirectToRegistrosTutorado(event, '<?php echo $grupo_id; ?>')"><strong>Consultar registros de grupo tutorado</strong></button><br><br>
             <h3>Horario:</h3><br>
             <div class="horario">
                 <img src="../images/horario.jpeg" alt="">
@@ -72,5 +85,15 @@
         </div>
     </main>
     <footer>&copy; 2024 ClassCheck</footer>
+    <script>
+    function handleRedirectToRegistrosTutorado(event, grupoId) {
+        event.preventDefault();
+        if (grupoId) {
+            window.location.href = "/classcheck_github/ui_maestro/grupo_tutorado/registros_tutorado.php?grupo_id=" + grupoId;
+        } else {
+            alert("No tienes grupo tutorado asignado.");
+        }
+    }
+    </script>
 </body>
 </html>
