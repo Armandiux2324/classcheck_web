@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['materia_id'])) {
         $_SESSION['materia_id'] = $_POST['materia_id'];
-        header('Location: /classcheck_github/ui_maestro/registro_alumno_maestro.php');
+        header('Location: /classcheck_github/ui_maestro/lista_grupo_maestro.php');
         exit();
     } else {
         echo "Error: Matrícula del alumno no proporcionada.";

@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hora_inicio = $_POST['hora_inicio'];
     $hora_fin = $_POST['hora_fin'];
     $grupo_id = $_SESSION['grupo_id'];  // Tomado de la sesión
+    $materia_id = $_SESSION['materia_id'];
 
     // Generar el contenido del QR.
     $qrContent = "grupo_id:$grupo_id;hora_inicio:$hora_inicio;hora_fin:$hora_fin";
@@ -30,12 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     QRcode::png($qrContent, $filePath, QR_ECLEVEL_L, 4);
 
     // Insertar la ruta del QR y demás datos en la base de datos.
-    $query = "INSERT INTO asistencias (codigo_qr, grupo_id, hora_inicio, hora_fin) VALUES (?, ?, ?, ?)";
+    $query = "INSERT INTO asistencias (codigo_qr, grupo_id, materia_id, hora_inicio, hora_fin) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("siss", $filename, $grupo_id, $hora_inicio, $hora_fin);
+    $stmt->bind_param("siiss", $filename, $grupo_id, $materia_id, $hora_inicio, $hora_fin);
     
     if ($stmt->execute()) {
-        echo "<script>alert('QR generado exitosamente.');</script>";
+        // Almacenar el nombre del archivo en la sesión
+        $_SESSION['qr_filename'] = $filename;
+        echo "<script>alert('QR generado exitosamente.');
+        window.location.href = '/classcheck_github/ui_maestro/generar_qr.php';</script>";
     } else {
         echo "<script>alert('Error al guardar el QR en la base de datos.');</script>";
     }

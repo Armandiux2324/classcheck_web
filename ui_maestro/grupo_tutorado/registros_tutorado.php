@@ -18,6 +18,9 @@
         }
 
         $grupo_id = isset($_GET['grupo_id']) ? $_GET['grupo_id'] : null;
+        $maestro_id = $_SESSION['maestro_id']; 
+        $username_maestro = $_SESSION['username']; 
+
 
         if ($grupo_id) {
             $query_alumnos = "SELECT matricula_alumno FROM grupos_alumno WHERE grupo_id = ?";
@@ -27,6 +30,32 @@
             $result_alumnos = $stmt->get_result();
         } else {
             echo '<p>El grupo tutorado no está disponible.</p>';
+        }
+
+        $query_grupo = "SELECT * FROM grupos WHERE id_grupo = ?";
+        $stmt = $conn->prepare($query_grupo);
+        $stmt->bind_param("i", $grupo_id);
+        $stmt->execute();
+        $result_grupo = $stmt->get_result();
+
+        if ($result_grupo->num_rows === 1) {
+            $row = $result_grupo->fetch_assoc();
+            $grupo_completo = $row['grado'] . '°' . $row['grupo'];
+        } else {
+            $nombre_completo = "Grupo no disponible";
+        }
+
+        $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
+        $stmt = $conn->prepare($query_maestro);
+        $stmt->bind_param("s", $username_maestro); // Cambié "i" a "s" porque es un string
+        $stmt->execute();
+        $result_maestro = $stmt->get_result();
+
+        if ($result_maestro->num_rows === 1) {
+            $row = $result_maestro->fetch_assoc();
+            $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
+        } else {
+            $nombre_completo = "Nombre no disponible";
         }
 
         $stmt->close();
@@ -47,11 +76,9 @@
                     <h1>Perfil de usuario</h1>
                     <div class="pfp"></div>
                     <h3>Nombre:</h3>
-                    <p>xxxxxx</p><br>
-                    <h3>Unidad académica</h3>
-                    <p>xxxxxxx</p><br>
+                    <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>
                     <h3>Grupo tutorado:</h3>
-                    <p>Grupo X</p><br>
+                    <p><?php echo htmlspecialchars($grupo_completo); ?></p><br>
                 </div>
             </div>
         </div>
@@ -63,7 +90,7 @@
                     if ($result_alumnos->num_rows > 0) {
                         while($alumno = $result_alumnos->fetch_assoc()) {
                             $matricula_alumno = htmlspecialchars($alumno['matricula_alumno']);
-                            echo '<form method="POST" action="/classcheck_github/php/php_maestro/set_matricula.php" style="display:inline;">
+                            echo '<form method="POST" action="/classcheck_github/php/php_maestro/set_matricula_tutorado.php" style="display:inline;">
                                     <input type="hidden" name="matricula_alumno" value="' . $matricula_alumno . '">
                                     <input type="hidden" name="grupo_id" value="' . $grupo_id . '">
                                     <button type="submit" class="button-content" style="margin: -4px;"><strong>' . $matricula_alumno . '</strong></button>

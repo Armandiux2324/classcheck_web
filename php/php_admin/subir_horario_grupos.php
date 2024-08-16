@@ -7,21 +7,20 @@ if ($conn->connect_error) {
 }
 
 // Lógica para subir el horario
-if(isset($_POST['submit'])) {
-    if (isset($_FILES['uploadPDF']) && isset($_POST['selectGrupo'])) {
-        $grupoId = $_POST['selectGrupo'];
+if (isset($_POST['submit'])) {
+    if (isset($_FILES['uploadPDF']) && isset($_POST['hiddenGroupId']) && isset($_POST['selectUnidadAcademica']) && isset($_POST['selectGrado']) && isset($_POST['selectCarrera'])) {
+        $grupoId = $_POST['hiddenGroupId'];
+        $grado = $_POST['selectGrado'];
+        $carreraId = $_POST['selectCarrera'];
         $file = $_FILES['uploadPDF'];
 
         if ($file['error'] === UPLOAD_ERR_OK) {
             $fileTmpPath = $file['tmp_name'];
-            $fileName = $file['name'];
-            $fileSize = $file['size'];
-            $fileType = $file['type'];
-            $fileNameCmps = explode(".", $fileName);
-            $fileExtension = strtolower(end($fileNameCmps));
+            $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
             // Definir el nombre del archivo y la ubicación de destino
-            $uploadFileDir = $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/archivos/horarios/';
+            $fileName = 'horario_' . $grado . '_' . $grupoId . '.' . $fileExtension;
+            $uploadFileDir = $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/archivos/horarios/horarios_grupos/';
             $dest_path = $uploadFileDir . $fileName;
 
             // Mover el archivo al directorio de destino
@@ -34,6 +33,7 @@ if(isset($_POST['submit'])) {
                 if ($stmt->execute()) {
                     echo "<script>
                             alert('El horario se ha subido con éxito.');
+                            window.location.href = '/classcheck_github/ui_administrador/AsignarHorariosAdmin/AsignarH_Aopcion2.php';</script>;
                         </script>";
                 } else {
                     echo "Error al actualizar el horario en la base de datos: " . $conn->error;
@@ -45,8 +45,8 @@ if(isset($_POST['submit'])) {
             echo "Error al subir el archivo. Código de error: " . $file['error'];
         }
     } else {
-        echo "No se ha enviado un archivo o no se ha seleccionado un maestro.";
+        echo "No se ha enviado un archivo o no se han seleccionado todos los campos.";
     }
     $conn->close();
 }
-
+?>

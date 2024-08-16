@@ -18,7 +18,7 @@
     }
 
     $grupo_id = $_SESSION['grupo_id'];
-    $materia_id = $_SESSION['$materia_id'];
+    $materia_id = $_SESSION['materia_id'];
     $maestro_id = $_SESSION['maestro_id']; 
     $username_maestro = $_SESSION['username']; 
 

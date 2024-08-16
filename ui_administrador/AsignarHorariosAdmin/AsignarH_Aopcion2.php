@@ -71,9 +71,12 @@
                         </select>
 
                         <p class="p_instrucciones">Seleccione el grupo:</p>
-                        <select id="selectGrupo" name="selectGrupo" class="campo-form" style="font-size: 18px;">
+                        <select id="selectGrupo" name="selectGrupo" class="campo-form" style="font-size: 18px;" onchange="updateGroupId(this.value)">
                             <option value="">Seleccione un grado primero</option>
                         </select>
+
+                        <!-- Campo oculto para el id del grupo -->
+                        <input type="hidden" id="hiddenGroupId" name="hiddenGroupId">
 
                         <p class="p_instrucciones">Subir PDF de horario:</p>
                         <input type="file" id="uploadPDF" name="uploadPDF" accept=".pdf" class="login-input" style="font-size: 18px;">
@@ -88,7 +91,7 @@
 <script>
     function fetchCarreras(unidadAcademicaId) {
         if (unidadAcademicaId !== "") {
-            fetch(`../../php/php_admin/gets/get_carreras.php?id_ua=${unidadAcademicaId}`)
+            fetch(`../../php/php_admin/gets/get_carreras.php?uacademica_id=${unidadAcademicaId}`)
             .then(response => response.json())
             .then(data => {
                 let carreraSelect = document.getElementById('selectCarrera');
@@ -132,6 +135,10 @@
                 });
             });
         }
+    }
+
+    function updateGroupId(grupoId) {
+        document.getElementById('hiddenGroupId').value = grupoId;
     }
 </script>
 </html>

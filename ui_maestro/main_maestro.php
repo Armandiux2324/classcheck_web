@@ -47,6 +47,21 @@
         $grupo_id = null;
     }
 
+    // Consulta para obtener el horario del maestro
+    $query_horario = "SELECT horario FROM maestro WHERE id_maestro = ?";
+    $stmt = $conn->prepare($query_horario);
+    $stmt->bind_param("i", $maestro_id);
+    $stmt->execute();
+    $result_horario = $stmt->get_result();
+
+    if ($result_horario->num_rows === 1) {
+        $row = $result_horario->fetch_assoc();
+        $horario_path = $row['horario'];
+    } else {
+        $horario_path = "No hay horario asignado"; // Ruta por defecto si no hay horario
+    }
+
+
 
     $stmt->close();
     $conn->close();
@@ -80,7 +95,9 @@
                 <button class="button-content" onclick="handleRedirectToRegistrosTutorado(event, '<?php echo $grupo_id; ?>')"><strong>Consultar registros de grupo tutorado</strong></button><br><br>
             <h3>Horario:</h3><br>
             <div class="horario">
-                <img src="../images/horario.jpeg" alt="">
+                <?php
+                    echo "<iframe src='/classcheck_github/archivos/horarios/horarios_maestros/$horario_path' width='800' height='400' style='border: none;'></iframe>";
+                ?>
             </div><br><br><br><br><br>
         </div>
     </main>

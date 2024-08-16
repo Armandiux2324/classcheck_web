@@ -9,6 +9,7 @@ if ($conn->connect_error) {
 if (isset($_GET['uacademica_id'])) {
     $uacademica_id = $_GET['uacademica_id'];
 
+    // Consulta para obtener las carreras asociadas a la unidad académica
     $query = "SELECT id_carrera, nombre_carrera FROM carreras WHERE id_ua = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $uacademica_id);
@@ -24,6 +25,4 @@ if (isset($_GET['uacademica_id'])) {
 } else {
     echo json_encode([]);
 }
-
-$stmt->close();
-$conn->close();
+?>

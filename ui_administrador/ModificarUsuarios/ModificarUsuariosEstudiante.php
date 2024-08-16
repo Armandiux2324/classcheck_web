@@ -40,6 +40,21 @@
         echo "Usuario no seleccionado.";
         exit;
     }
+
+     // Consulta para obtener el nombre y apellidos
+     $query_admin = "SELECT nombre_admin, apaterno_admin, amaterno_admin FROM administrador WHERE username_admin = ?";
+     $stmt = $conn->prepare($query_admin);
+     $stmt->bind_param("s", $username_admin);
+     $stmt->execute();
+     $result_admin = $stmt->get_result();
+ 
+     if ($result_admin->num_rows === 1) {
+         $row = $result_admin->fetch_assoc();
+         $nombre_completo = $row['nombre_admin'] . ' ' . $row['apaterno_admin'] . ' ' . $row['amaterno_admin'];
+     } else {
+         $nombre_completo = "Nombre no disponible";
+     }
+ 
     ?>
 </head>
 <body>
@@ -53,11 +68,10 @@
         <div id="user_info">
             <div class="perfil">
                 <div>
+                    <h1>Perfil de usuario</h1>
                     <div class="pfp"></div>
                     <h3>Nombre:</h3>
-                    <p>xxxxxx</p><br>
-                    <h3>ID de administrador:</h3>
-                    <p>x</p><br>
+                    <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>
                 </div>
             </div>
         </div>

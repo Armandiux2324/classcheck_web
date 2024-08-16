@@ -11,6 +11,7 @@
     <script src="../../scripts/main_script.js"></script>
     <script src="../../scripts/admin_script.js"></script>
     <?php
+    session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/conn_db.php';
     $conn = new mysqli($hostname, $username, $password, $db);
     
@@ -62,6 +63,23 @@
             }
         }
     }
+
+    $admin_id = $_SESSION['admin_id']; 
+    $username_admin = $_SESSION['username']; 
+
+    // Consulta para obtener el nombre y apellidos
+    $query_admin = "SELECT nombre_admin, apaterno_admin, amaterno_admin FROM administrador WHERE username_admin = ?";
+    $stmt = $conn->prepare($query_admin);
+    $stmt->bind_param("s", $username_admin);
+    $stmt->execute();
+    $result_admin = $stmt->get_result();
+
+    if ($result_admin->num_rows === 1) {
+        $row = $result_admin->fetch_assoc();
+        $nombre_completo = $row['nombre_admin'] . ' ' . $row['apaterno_admin'] . ' ' . $row['amaterno_admin'];
+    } else {
+        $nombre_completo = "Nombre no disponible";
+    }
     
     
     ?>
@@ -79,10 +97,8 @@
                 <div>
                     <h1>Perfil de usuario</h1>
                     <div class="pfp"></div>
-                    <h3>Nombre:</h3>
-                    <p>xxxxxx</p><br>
-                    <h3>ID de administrador:</h3>
-                    <p>x</p><br>
+                    <h3>Nombre:</h3><br>
+                    <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>
                 </div>
             </div>
         </div>

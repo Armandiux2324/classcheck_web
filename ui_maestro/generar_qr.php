@@ -60,7 +60,7 @@
             <div class="buttons_list">
                 <h3 class="section_title">Generar QR de asistencia</h3>
                 <p class="p_instrucciones">Ingrese el lapso de tiempo de validez del QR:</p>
-                <form action="generar_qr.php" method="post">
+                <form action="/classcheck_github/php/php_maestro/generate_qr.php" method="post">
                     <h3>Hora de inicio:</h3>
                     <input type="time" id="hora_inicio" name="hora_inicio" class="hora-qr" required>
                     <h3>Hora de fin:</h3>
@@ -68,7 +68,14 @@
                     <br><button type="submit" class="button-content"><strong>Generar QR</strong></button><br><br>
                 </form>
                 <div id="qr">
-                    <?php if (isset($filename)) { echo "<img src='/classcheck_github/archivos/qr/$filename' alt='Código QR' />"; } ?>
+                <?php 
+                    if (isset($_SESSION['qr_filename'])) { 
+                        $filename = $_SESSION['qr_filename']; 
+                        echo "<img src='/classcheck_github/archivos/qr/$filename' alt='Código QR' />"; 
+                        // Limpiar la sesión para evitar mostrar el mismo QR en futuras solicitudes
+                        unset($_SESSION['qr_filename']);
+                    } 
+                    ?>
                 </div>
         </div>
     </main>

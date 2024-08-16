@@ -27,6 +27,13 @@
     $stmt->execute();
     $result_materias = $stmt->get_result();
 
+    if ($result_materias->num_rows === 1) {
+        $row = $result_materias->fetch_assoc();
+        $_SESSION['materia_id'] = $row['id_materia'];
+    } else {
+        $_SESSION['materia_id'] = 'Matera no disponible';
+    }
+
     $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
     $stmt = $conn->prepare($query_maestro);
     $stmt->bind_param("s", $username_maestro); // Cambié "i" a "s" porque es un string
@@ -66,7 +73,7 @@
                 <p class="p_instrucciones">Seleccione la materia y posteriormente el grupo</p>
                 <?php
                 if ($result_materias->num_rows > 0) {
-                    while($materia = $result_materias->fetch_assoc()) {
+                    while ($materia = $result_materias->fetch_assoc()) {
                         $materia_id = htmlspecialchars($materia['id_materia']);
                         $nombre_materia = htmlspecialchars($materia['nombre_materia']);
 
@@ -82,10 +89,10 @@
                         $result_grupos = $stmt_grupos->get_result();
 
                         if ($result_grupos->num_rows > 0) {
-                            while($grupo = $result_grupos->fetch_assoc()) {
+                            while ($grupo = $result_grupos->fetch_assoc()) {
                                 $grupo_id = htmlspecialchars($grupo['id_grupo']);
                                 $grupo_nombre = htmlspecialchars($grupo['grupo']);
-                                echo '<button class="button-content" onclick="redirectToGeneradorQR(\'' . $grupo_id . '\')"><strong>' . $grupo_nombre . '</strong></button><br>';
+                                echo '<button class="button-content" onclick="redirectToGeneradorQR(\'' . $grupo_id . '\', \'' . $materia_id . '\')"><strong>' . $grupo_nombre . '</strong></button><br>';
                             }
                         }
 
@@ -95,6 +102,7 @@
                     echo '<p>No tienes materias asociadas.</p>';
                 }
                 ?>
+
             </div>
         </div>
     </main>
@@ -106,17 +114,18 @@
         grupoContainer.style.display = grupoContainer.style.display === 'none' ? 'block' : 'none';
     }
 
-    function redirectToGeneradorQR(grupoId) {
+    function redirectToGeneradorQR(grupoId, materiaId) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/classcheck_github/php/php_maestro/guardar_grupo_id.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            window.location.href = "/classcheck_github/ui_maestro/generar_qr.php";
+            window.location.href = "/classcheck_github/ui_maestro/generar_qr.php?grupo_id=" + grupoId + "&materia_id=" + materiaId;
         }
     };
-    xhr.send("grupo_id=" + grupoId);
+    xhr.send("grupo_id=" + grupoId + "&materia_id=" + materiaId);
 }
+
 
 </script>
 </html>
