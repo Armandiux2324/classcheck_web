@@ -49,6 +49,7 @@
         <div id="user_info">
             <div class="perfil">
                 <div>
+                    <h1>Perfil de usuario</h1>
                     <div class="pfp"></div>
                     <h3>Nombre:</h3><br>
                     <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>

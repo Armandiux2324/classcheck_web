@@ -231,3 +231,8 @@ function asignTutorGroup(event){
         alert("Grupo tutorado asignado exitosamente.");
     }
 }
+
+function redirectToAddGroup(event) {
+    event.preventDefault(); // Evita el comportamiento por defecto del formulario
+    window.location.href = '/classcheck_github/ui_administrador/Inserts/agregar_grupos.php';
+}

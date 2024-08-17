@@ -16,7 +16,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 $grupos = [];
-while($row = $result->fetch_assoc()) {
+while ($row = $result->fetch_assoc()) {
     $grupos[] = $row;
 }
 

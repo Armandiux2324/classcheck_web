@@ -6,7 +6,14 @@
     <title>ClassCheck - Acciones Administrativas</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main_style.css">
-    <script src="../scripts/admin_script.js"></script>
+    <script src="/classcheck_github/scripts/admin_script.js"></script>
+    <script>
+        function redirectToAddGroup(event) {
+            event.preventDefault(); // Evita el comportamiento por defecto del formulario
+            window.location.href = '/classcheck_github/ui_administrador/Inserts/agregar_grupos.php';
+        }
+
+    </script>
     <?php
     session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/conn_db.php';
@@ -64,19 +71,26 @@
                     <button class="button-content" onclick="redirectToAdminUsers(event)"><strong>Administrar usuarios</strong></button>
                     <button class="button-content" onclick="redirectToAsignSchedule(event)"><strong>Asignar horarios</strong></button><br><br>
                     <button class="button-content" onclick="redirectToAsignGroup(event)"><strong>Asignar grupos</strong></button>
-                    <button class="button-content" onclick=""><strong>Agregar grupos</strong></button><br><br>
+                    <button class="button-content" onclick="redirectToAddGroup(event)"><strong>Agregar grupos</strong></button><br><br>
                     <button class="button-content" onclick=""><strong>Agregar alumnos a grupos</strong></button>
                     <button class="button-content" onclick=""><strong>Agregar unidades académicas</strong></button><br><br>
                     <button class="button-content" onclick=""><strong>Agregar carreras</strong></button>
                     <button class="button-content" onclick=""><strong>Agregar materias</strong></button><br><br>
-                    <button class="button-content" onclick=""><strong>Agregar grupos</strong></button>
                     <p class="p_instrucciones">Acciones para fin de cuatrimestre:</p>
-                    <form id="deleteForm" action="main_admin.php" method="POST">
-                        <button type="submit" style="width: 300px;" class="button-content" name="borrar_grupos_asignados"><strong>Eliminar grupos asignados a los maestros</strong></button>
+                    <form id="deleteForm" action="/classcheck_github/php/php_admin/fin_cuatri.php" method="POST">
+                        <input type="hidden" name="confirmar_eliminacion" value="1">
+                        <button type="submit" style="width: 300px;" class="button-content" name="borrar_grupos_asignados">
+                            <strong>Eliminar grupos asignados a los maestros</strong>
+                        </button>
                     </form><br>
-                    <form id="updateForm" action="main_admin.php" method="POST">
-                        <button type="submit" style="width: 300px;" class="button-content" name="actualizar_grado"><strong>Actualizar grado de los grupos</strong></button><br><br><br><br>
+
+                    <form id="updateForm" action="/classcheck_github/php/php_admin/fin_cuatri.php" method="POST">
+                        <input type="hidden" name="confirmar_actualizacion" value="1">
+                        <button type="submit" style="width: 300px;" class="button-content" name="actualizar_grado">
+                            <strong>Actualizar grado de los grupos</strong>
+                        </button><br><br><br><br>
                     </form>
+
                 </div>
                 
             </div>

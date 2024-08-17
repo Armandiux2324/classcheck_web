@@ -12,21 +12,18 @@ if (isset($_POST['submit'])) {
         $grupoId = $_POST['hiddenGroupId'];
         $maestroId = $_POST['selectMaestro'];
         
-        $query_asignar_grupo = "INSERT INTO grupos_maestro(grupo_id, maestro_id) VALUES (?, ?)";
+        $query_asignar_grupo = "INSERT INTO grupo_tutorado(grupo_id, maestro_id) VALUES (?, ?)";
         $stmt = $conn->prepare($query_asignar_grupo);
         $stmt->bind_param("ii", $grupoId, $maestroId);
 
         if ($stmt->execute()) {
             echo "<script>
                         alert('El grupo se ha asignado con éxito.');
-                        window.location.href = '/classcheck_github/ui_administrador/AsignarGruposAdmin/AsignarGruposOpcion1.php';</script>;
+                        window.location.href = '/classcheck_github/ui_administrador/AsignarGruposAdmin/AsignarGruposOpcion2.php';</script>;
                 </script>";
         } else {
             echo "Error al insertar el grupo asignado en la base de datos: " . $conn->error;
         }
     }
-}
-else {
-    echo "<script>alert('eres un pendejo')</script>";
 }
     $conn->close();

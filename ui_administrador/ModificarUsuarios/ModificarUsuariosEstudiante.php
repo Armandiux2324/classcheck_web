@@ -11,6 +11,7 @@
     <script src="../../scripts/admin_script.js"></script>
     <?php
     // Código de conexión a la base de datos
+    session_start();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_admin/update_users.php';
     $conn = new mysqli($hostname, $username, $password, $db);
 
@@ -20,6 +21,7 @@
 
     // Obtener el nombre de usuario desde el parámetro GET
     $username = isset($_GET['user']) ? $_GET['user'] : '';
+    $username_admin = $_SESSION['username']; 
 
     if (!empty($username)) {
         // Consulta para obtener los datos del alumno
@@ -70,7 +72,7 @@
                 <div>
                     <h1>Perfil de usuario</h1>
                     <div class="pfp"></div>
-                    <h3>Nombre:</h3>
+                    <h3>Nombre:</h3><br>
                     <p><?php echo htmlspecialchars($nombre_completo); ?></p><br>
                 </div>
             </div>
