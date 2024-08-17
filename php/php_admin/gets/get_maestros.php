@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 if (isset($_GET['uacademica_id'])) {
     $uacademica_id = $_GET['uacademica_id'];
 
-    $query = "SELECT id_maestro, nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE unidad_academica_id = ?";
+    $query = "SELECT id_maestro, nombre_maestro, apaterno_maestro, amaterno_maestro, username_maestro FROM maestro WHERE unidad_academica_id = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("i", $uacademica_id);
     $stmt->execute();

@@ -66,10 +66,10 @@
             <div class="content">
                 <div class="buttons-content">
                     <br><br><h2>Agregar grupos al sistema</h2><br>
-                    <form action="/classcheck_github/php/php_admin/inserts_tablas/insert_grupos.php" method="post" enctype="multipart/form-data">
+                    <form action="/classcheck_github/php/php_admin/inserts_tablas/insert_carreras.php" method="post" enctype="multipart/form-data">
                         <p class="p_instrucciones" style="margin: 8px;">Ingrese la unidad académica:</p>
                         <select id="selectUnidadAcademica" name="selectUnidadAcademica" class="campo-form" style="font-size: 18px; width: 300px;" onchange="fetchCarreras(this.value)">
-                            <option value="">Seleccione una unidad académica</option>
+                            <option value="">Seleccione la unidad académica</option>
                             <?php
                                 if ($result_unidad_academica->num_rows > 0) {
                                     while($row = $result_unidad_academica->fetch_assoc()) {
@@ -80,16 +80,9 @@
                                 }
                             ?>
                             </select>
-                        <p class="p_instrucciones" style="margin: 8px;">Ingrese la carrera del grupo:</p>
-                        <select id="selectCarrera" name="selectCarrera" class="campo-form" style="font-size: 18px; width: calc(100% - 10px); margin: 3px;" required>
-                            <option value="">Seleccione una unidad académica primero</option>
-                        </select>
-                        <p class="p_instrucciones" style="margin: 8px;">Ingrese el grado:</p>
-                            <input type="number" id="grado" name="grado" class="campo-form" style="font-size: 18px; width: calc(100% - 10px); margin: 3px;" required>
-                        <p class="p_instrucciones" style="margin: 8px;">Ingrese el grupo (en mayúsculas):</p>
-                            <input id="grupo" name="grupo" class="campo-form" onchange="updateGroupId(this.value)" style="font-size: 18px; width: calc(100% - 10px); margin: 3px;" pattern="[A-Z]{1}" required>
-                        
-                        <button type="submit" name="submit" class="button-content"><strong>Agregar grupo</strong></button><br><br>
+                        <p class="p_instrucciones" style="margin: 8px;">Ingrese el nombre de la carrera:</p>
+                            <input id="nombre_carrera" name="nombre_carrera" class="campo-form" style="font-size: 18px; width: calc(100% - 10px); margin: 3px;" required>
+                       <button type="submit" name="submit" class="button-content"><strong>Agregar carrera</strong></button><br><br>
                     </form>
                 </div>
             </div>

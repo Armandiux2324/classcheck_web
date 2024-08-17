@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClassCheck - Asignar grupo tutorado</title>
+    <title>ClassCheck - Agregar alumnos a grupos</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/main_style.css">
     <link rel="stylesheet" href="../../css/index_style.css">
@@ -19,7 +19,7 @@
     }
 
     // Consulta para obtener los datos de la tabla maestro
-    $query_maestro = "SELECT id_maestro, nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro";
+    $query_maestro = "SELECT id_maestro, nombre_maestro, apaterno_maestro, amaterno_maestro, username_maestro FROM maestro";
     $result_maestro = $conn->query($query_maestro);
 
     $username_admin = $_SESSION['username']; 
@@ -65,10 +65,10 @@
         <div>
             <div class="content">
                 <div class="buttons-content">
-                    <br><br><h2>Asignar grupo de clases</h2><br>
-                    <form action="/classcheck_github/php/php_admin/asignar_grupos/asignar_grupo_tutorado.php" method="post" enctype="multipart/form-data">
+                    <br><br><h2>Agregar alumnos a grupos</h2><br>
+                    <form action="/classcheck_github/php/php_admin/inserts_tablas/insert_grupos_alumno.php" method="post" enctype="multipart/form-data">
                         <p class="p_instrucciones" style="margin: 8px;">Ingrese la unidad académica:</p>
-                        <select id="selectUnidadAcademica" name="selectUnidadAcademica" class="campo-form" style="font-size: 18px; width: 300px;" onchange="fetchMaestrosCarreras(this.value)">
+                        <select id="selectUnidadAcademica" name="selectUnidadAcademica" class="campo-form" style="font-size: 18px; width: 300px;" onchange="fetchCarreras(this.value)">
                             <option value="">Seleccione una unidad académica</option>
                             <?php
                                 if ($result_unidad_academica->num_rows > 0) {
@@ -82,10 +82,6 @@
                             </select>
                         <p class="p_instrucciones" style="margin: 8px;">Ingrese la carrera del grupo::</p>
                         <select id="selectCarrera" name="selectCarrera" class="campo-form" onchange="fetchGrados(this.value)" style="font-size: 18px; width: calc(100% - 10px); margin: 3px;" required>
-                            <option value="">Seleccione un maestro primero</option>
-                        </select>
-                        <p class="p_instrucciones" style="margin: 8px;">Ingrese el nombre del maestro:</p>
-                        <select id="selectMaestro" name="selectMaestro" class="campo-form" style="font-size: 18px; width: calc(100% - 10px); margin: 3px;" required>
                             <option value="">Seleccione una unidad académica primero</option>
                         </select>
                         <p class="p_instrucciones" style="margin: 8px;">Seleccione el grado:</p>
@@ -96,8 +92,10 @@
                         <select id="selectGrupo" name="selectGrupo" class="campo-form" onchange="updateGroupId(this.value)" style="font-size: 18px; width: calc(100% - 10px); margin: 3px;" required>
                             <option value="">Seleccione un grado primero</option>
                         </select>
+                        <p class="p_instrucciones" style="margin: 8px;">Ingrese la matrícula del alumno:</p>
+                            <input id="matricula" name="matricula" class="campo-form" style="font-size: 18px; width: calc(100% - 10px); margin: 3px;" pattern="[0-9]{9}" required>
                         <input type="hidden" id="hiddenGroupId" name="hiddenGroupId">
-                        <button type="submit" name="submit" class="button-content"><strong>Asignar grupo</strong></button><br><br>
+                        <button type="submit" name="submit" class="button-content"><strong>Agregar alumno</strong></button><br><br>
                     </form>
                 </div>
             </div>
@@ -106,17 +104,8 @@
     </main>
     <footer>&copy; 2024 ClassCheck</footer>
     <script>
-        function fetchMaestrosCarreras(unidadAcademicaId) {
+        function fetchCarreras(unidadAcademicaId) {
             if (unidadAcademicaId !== "") {
-                fetch(`../../php/php_admin/gets/get_maestros.php?uacademica_id=${unidadAcademicaId}`)
-                .then(response => response.json())
-                .then(data => {
-                    let maestroSelect = document.getElementById('selectMaestro');
-                    maestroSelect.innerHTML = '<option value="">Seleccione un maestro</option>';
-                    data.forEach(maestro => {
-                        maestroSelect.innerHTML += `<option value="${maestro.id_maestro}">${maestro.nombre_maestro} ${maestro.apaterno_maestro} ${maestro.amaterno_maestro}</option>`;
-                    });
-                });
                 fetch(`../../php/php_admin/gets/get_carreras.php?uacademica_id=${unidadAcademicaId}`)
                 .then(response => response.json())
                 .then(data => {
@@ -151,26 +140,29 @@
         function fetchGrupos(grado) {
             if (grado !== "") {
                 const carreraId = document.getElementById('selectCarrera').value;
-                const grupoSelect = document.getElementById('selectGrupo');
-                const grupoLetra = grupoSelect.options[grupoSelect.selectedIndex].text; // Obtener el texto de la opción seleccionada
-
-                // Enviar el texto del grupo como parámetro en la consulta
-                fetch(`../../php/php_admin/gets/get_grupos.php?carrera_id=${carreraId}&grado=${grado}&grupo=${encodeURIComponent(grupoLetra)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        grupoSelect.innerHTML = '<option value="">Seleccione un grupo</option>';
-                        data.forEach(grupo => {
-                            grupoSelect.innerHTML += `<option value="${grupo.id_grupo}">${grupo.grupo}</option>`;
-                        });
+                fetch(`../../php/php_admin/gets/get_grupos.php?carrera_id=${carreraId}&grado=${grado}`)
+                .then(response => response.json())
+                .then(data => {
+                    let grupoSelect = document.getElementById('selectGrupo');
+                    grupoSelect.innerHTML = '<option value="">Seleccione un grupo</option>';
+                    data.forEach(grupo => {
+                        grupoSelect.innerHTML += `<option value="${grupo.id_grupo}">${grupo.grupo}</option>`;
                     });
+                });
             }
         }
-
-
 
         function updateGroupId(grupoId){
             document.getElementById('hiddenGroupId').value = grupoId;
         }
+
+        document.getElementById('selectMaestro').addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const usernameMaestro = selectedOption.getAttribute('data-username');
+        const maestroId = selectedOption.value;
+        document.getElementById('hiddenUsernameTeacher').value = usernameMaestro;
+        document.getElementById('hiddenMaestroId').value = maestroId;
+    });
 
     </script>
 </body>

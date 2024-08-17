@@ -19,7 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   </script>';
         if (isset($_POST['confirmar_eliminacion']) && $_POST['confirmar_eliminacion'] == 1) {
             $query = "DELETE FROM grupos_maestro";
-            if ($conn->query($query) === TRUE) {
+            $query2 = "DELETE FROM grupo_tutorado";
+            if ($conn->query($query) === TRUE && $conn->query($query2) === TRUE) {
                 echo "<script>alert('Se han eliminado los grupos asignados y tutorados.');
                 window.location.href = '/classcheck_github/ui_administrador/main_admin.php';</script>;";
             } else {
