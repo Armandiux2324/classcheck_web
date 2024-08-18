@@ -214,3 +214,14 @@ button:hover {
     display: none;
     margin-top: 10px;
 }
+
+.observation-container {
+    margin-bottom: 50px;
+}
+
+.observation-text {
+    margin-top: 10px; /* Ajusta este valor según el espacio que desees */
+    padding: 10px;    /* Añade un poco de espacio interno */
+    border: 1px solid black; /* Añade un borde negro de 1px */
+    background-color: #f9f9f9; /* Fondo claro para mejorar la visibilidad */
+}

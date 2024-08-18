@@ -94,3 +94,18 @@ create table grupo_tutorado(maestro_id int, grupo_id int, primary key(maestro_id
 alter table grupo_tutorado add constraint fk_gt_m foreign key(maestro_id) REFERENCES maestro(id_maestro);
 
 alter table grupo_tutorado add constraint fk_gt_g foreign key (grupo_id) REFERENCES grupos(id_grupo);
+
+create table registro_asistencia_alumno(matricula_alumno int, codigo_qr varchar(100), cant_asistencias int, cant_faltas int, primary key(matricula_alumno, codigo_qr));
+
+alter table registro_asistencia_alumno add constraint fk_rga_alumno foreign key (matricula_alumno) references alumno(matricula);
+
+alter table registro_asistencia_alumno add constraint fk_rga_asistencias foreign key (codigo_qr) references asistencias(codigo_qr);
+
+alter table asistencias add column materia_id int;
+
+alter table asistencias add constraint fk_asistencias_materia foreign key (materia_id) REFERENCES materias(id_materia);
+
+alter table observaciones add column grupo_id int;
+
+alter table observaciones add constraint fk_obs_grupo foreign key (grupo_id) references grupos(id_grupo);
+

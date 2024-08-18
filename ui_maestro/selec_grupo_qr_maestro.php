@@ -9,44 +9,42 @@
     <script src="../scripts/main_script.js"></script>
     <script src="../scripts/maestro_script.js"></script>
     <?php
-    session_start();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/conn_db.php';
-    $conn = new mysqli($hostname, $username, $password, $db);
+        session_start();
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/conn_db.php';
+        $conn = new mysqli($hostname, $username, $password, $db);
 
-    if ($conn->connect_error) {
-        die("Error al conectarse a la DB: " . $conn->connect_error);
-    }
+        if ($conn->connect_error) {
+            die("Error al conectarse a la DB: " . $conn->connect_error);
+        }
 
-    $maestro_id = $_SESSION['maestro_id']; 
-    $username_maestro = $_SESSION['username']; 
+        $maestro_id = $_SESSION['maestro_id']; 
 
-    // Consulta para obtener las materias asociadas al maestro
-    $query_materias = "SELECT id_materia, nombre_materia FROM materias WHERE username_maestro = ?";
-    $stmt = $conn->prepare($query_materias);
-    $stmt->bind_param("i", $username_maestro);
-    $stmt->execute();
-    $result_materias = $stmt->get_result();
+        // Consulta para obtener las materias asociadas al maestro
+        $query_materias = "SELECT id_materia, nombre_materia FROM materias WHERE maestro_id = ?";
+        $stmt = $conn->prepare($query_materias);
+        $stmt->bind_param("i", $maestro_id);
+        $stmt->execute();
+        $result_materias = $stmt->get_result();
 
-    if ($result_materias->num_rows === 1) {
-        $row = $result_materias->fetch_assoc();
-        $_SESSION['materia_id'] = $row['id_materia'];
-    } else {
-        $_SESSION['materia_id'] = 'Matera no disponible';
-    }
+        if ($result_materias->num_rows > 0) {
+            // Se obtienen todas las materias asociadas al maestro
+            $_SESSION['materia_id'] = 'Materia disponible';
+        } else {
+            $_SESSION['materia_id'] = 'Materia no disponible';
+        }
 
-    $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
-    $stmt = $conn->prepare($query_maestro);
-    $stmt->bind_param("s", $username_maestro); // Cambié "i" a "s" porque es un string
-    $stmt->execute();
-    $result_maestro = $stmt->get_result();
+        $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE id_maestro = ?";
+        $stmt = $conn->prepare($query_maestro);
+        $stmt->bind_param("i", $maestro_id);
+        $stmt->execute();
+        $result_maestro = $stmt->get_result();
 
-    if ($result_maestro->num_rows === 1) {
-        $row = $result_maestro->fetch_assoc();
-        $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
-    } else {
-        $nombre_completo = "Nombre no disponible";
-    }
-
+        if ($result_maestro->num_rows === 1) {
+            $row = $result_maestro->fetch_assoc();
+            $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
+        } else {
+            $nombre_completo = "Nombre no disponible";
+        }
     ?>
 </head>
 <body>
@@ -82,7 +80,9 @@
                         echo '<div id="grupo' . $materia_id . '" class="grupo-container">';
 
                         // Obtener los grupos asociados a la materia actual
-                        $query_grupos = "SELECT id_grupo, grupo FROM grupos WHERE id_grupo IN (SELECT grupo_id FROM materias WHERE id_materia = ?)";
+                        $query_grupos = "SELECT id_grupo, grupo 
+                        FROM grupos 
+                        WHERE id_grupo IN (SELECT grupo_id FROM materias WHERE id_materia = ?)";
                         $stmt_grupos = $conn->prepare($query_grupos);
                         $stmt_grupos->bind_param("i", $materia_id);
                         $stmt_grupos->execute();
@@ -94,6 +94,8 @@
                                 $grupo_nombre = htmlspecialchars($grupo['grupo']);
                                 echo '<button class="button-content" onclick="redirectToGeneradorQR(\'' . $grupo_id . '\', \'' . $materia_id . '\')"><strong>' . $grupo_nombre . '</strong></button><br>';
                             }
+                        } else {
+                            echo '<p>No hay grupos disponibles para esta materia.</p>';
                         }
 
                         echo '</div></div>';
@@ -102,7 +104,6 @@
                     echo '<p>No tienes materias asociadas.</p>';
                 }
                 ?>
-
             </div>
         </div>
     </main>
@@ -115,17 +116,15 @@
     }
 
     function redirectToGeneradorQR(grupoId, materiaId) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/classcheck_github/php/php_maestro/guardar_grupo_id.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            window.location.href = "/classcheck_github/ui_maestro/generar_qr.php?grupo_id=" + grupoId + "&materia_id=" + materiaId;
-        }
-    };
-    xhr.send("grupo_id=" + grupoId + "&materia_id=" + materiaId);
-}
-
-
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/classcheck_github/php/php_maestro/guardar_grupo_id.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.href = "/classcheck_github/ui_maestro/generar_qr.php?grupo_id=" + grupoId + "&materia_id=" + materiaId;
+            }
+        };
+        xhr.send("grupo_id=" + grupoId + "&materia_id=" + materiaId);
+    }
 </script>
 </html>

@@ -55,26 +55,5 @@ $stmt->close();
 
 $porcentaje_asistencia = ($total_qr > 0) ? ($cantidad_asistencias / $total_qr) * 100 : 0;
 
-// Guardar observaciones
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $observaciones = $_POST['observaciones'];
-
-    if (!empty($observaciones)) {
-        $query_observaciones = "INSERT INTO observaciones (matricula_alumno, materia_id, grupo_id, observacion) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($query_observaciones);
-        $stmt->bind_param("siis", $matricula_alumno, $materia_id, $grupo_id, $observaciones);
-
-        if ($stmt->execute()) {
-            echo "<script>alert('Observación guardada exitosamente.');</script>";
-        } else {
-            echo "<script>alert('Error al guardar la observación.');</script>";
-        }
-
-        $stmt->close();
-    } else{
-        echo '<script>alert("No hay observación para guardar")</script>';
-    }
-}
-
 $conn->close();
 ?>

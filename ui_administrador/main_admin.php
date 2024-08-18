@@ -92,11 +92,14 @@
                     <button class="button-content" onclick="redirectToAdminUsers(event)"><strong>Administrar usuarios</strong></button>
                     <button class="button-content" onclick="redirectToAsignSchedule(event)"><strong>Asignar horarios</strong></button><br><br>
                     <button class="button-content" onclick="redirectToAsignGroup(event)"><strong>Asignar grupos</strong></button>
-                    <button class="button-content" onclick="redirectToAddUA(event)"><strong>Agregar unidades académicas</strong></button><br><br>
-                    <button class="button-content" onclick="redirectToAddCarrera(event)"><strong>Agregar carreras</strong></button>
-                    <button class="button-content" onclick="redirectToAddMaterias(event)"><strong>Agregar materias</strong></button><br><br>
-                    <button class="button-content" onclick="redirectToAddGroup(event)"><strong>Agregar grupos</strong></button>
                     <button class="button-content" onclick="redirectToAddStudentGroup(event)"><strong>Agregar alumnos a grupos</strong></button>
+                    <p class="p_instrucciones">Acciones para comenzar:</p>
+                    <div class="button-container">
+                        <button class="button-content" onclick="redirectToAddUA(event)"><strong>Agregar unidades académicas</strong></button>
+                        <button class="button-content" onclick="redirectToAddCarrera(event)"><strong>Agregar carreras</strong></button><br><br>
+                        <button class="button-content" onclick="redirectToAddMaterias(event)"><strong>Agregar materias</strong></button>
+                        <button class="button-content" onclick="redirectToAddGroup(event)"><strong>Agregar grupos</strong></button>
+                    </div>
                     <p class="p_instrucciones">Acciones para fin de cuatrimestre:</p>
                     <form id="deleteForm" action="/classcheck_github/php/php_admin/fin_cuatri.php" method="POST">
                         <input type="hidden" name="confirmar_eliminacion" value="1">

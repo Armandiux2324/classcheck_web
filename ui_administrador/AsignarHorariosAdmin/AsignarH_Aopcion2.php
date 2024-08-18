@@ -95,7 +95,7 @@
                         <input type="hidden" id="hiddenGroupId" name="hiddenGroupId">
 
                         <p class="p_instrucciones">Subir PDF de horario:</p>
-                        <input type="file" id="uploadPDF" name="uploadPDF" accept=".pdf" class="login-input" style="font-size: 18px;">
+                        <input type="file" id="uploadPDF" name="uploadPDF" accept=".pdf" class="login-input" style="font-size: 18px;" required>
                         <button type="submit" name="submit" class="button-content"><strong>Subir horario</strong></button><br><br><br><br>
                     </form>
                 </div>

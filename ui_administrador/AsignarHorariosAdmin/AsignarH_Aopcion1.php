@@ -79,7 +79,7 @@
                     </select>
                     <br>
                     <p class="p_instrucciones">Seleccione el horario:</p>
-                    <input type="file" id="uploadPDF" name="uploadPDF" accept=".pdf" class="login-input">
+                    <input type="file" id="uploadPDF" name="uploadPDF" accept=".pdf" class="login-input" required>
                     <br>
                     <button type="submit" name="submit" class="button-content"><strong>Subir horario</strong></button>
                 </form>

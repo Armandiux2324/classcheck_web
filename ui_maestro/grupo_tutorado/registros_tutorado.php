@@ -9,29 +9,31 @@
     <script src="../../scripts/maestro_script.js"></script>
     <script src="../../scripts/main_script.js"></script>
     <?php
-        session_start();
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/conn_db.php';
-        $conn = new mysqli($hostname, $username, $password, $db);
+    session_start();
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/conn_db.php';
+    $conn = new mysqli($hostname, $username, $password, $db);
 
-        if ($conn->connect_error) {
-            die("Error al conectarse a la DB: " . $conn->connect_error);
-        }
+    if ($conn->connect_error) {
+        die("Error al conectarse a la DB: " . $conn->connect_error);
+    }
 
-        $grupo_id = isset($_GET['grupo_id']) ? $_GET['grupo_id'] : null;
-        $maestro_id = $_SESSION['maestro_id']; 
-        $username_maestro = $_SESSION['username']; 
+    $grupo_id = isset($_GET['grupo_id']) ? $_GET['grupo_id'] : null;
+    $maestro_id = $_SESSION['maestro_id']; 
+    $username_maestro = $_SESSION['username']; 
+    $materia_id = $_SESSION['materia_id'];
 
+    if ($grupo_id) {
+        // Establece el grupo_id en la sesión
+        $_SESSION['grupo_id'] = $grupo_id;
 
-        if ($grupo_id) {
-            $query_alumnos = "SELECT matricula_alumno FROM grupos_alumno WHERE grupo_id = ?";
-            $stmt = $conn->prepare($query_alumnos);
-            $stmt->bind_param("i", $grupo_id);
-            $stmt->execute();
-            $result_alumnos = $stmt->get_result();
-        } else {
-            echo '<p>El grupo tutorado no está disponible.</p>';
-        }
+        // Consulta para obtener los alumnos
+        $query_alumnos = "SELECT matricula_alumno FROM grupos_alumno WHERE grupo_id = ?";
+        $stmt = $conn->prepare($query_alumnos);
+        $stmt->bind_param("i", $grupo_id);
+        $stmt->execute();
+        $result_alumnos = $stmt->get_result();
 
+        // Consulta para obtener la información del grupo
         $query_grupo = "SELECT * FROM grupos WHERE id_grupo = ?";
         $stmt = $conn->prepare($query_grupo);
         $stmt->bind_param("i", $grupo_id);
@@ -42,25 +44,31 @@
             $row = $result_grupo->fetch_assoc();
             $grupo_completo = $row['grado'] . '°' . $row['grupo'];
         } else {
-            $nombre_completo = "Grupo no disponible";
+            $grupo_completo = "Grupo no disponible";
         }
-
-        $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
-        $stmt = $conn->prepare($query_maestro);
-        $stmt->bind_param("s", $username_maestro); // Cambié "i" a "s" porque es un string
-        $stmt->execute();
-        $result_maestro = $stmt->get_result();
-
-        if ($result_maestro->num_rows === 1) {
-            $row = $result_maestro->fetch_assoc();
-            $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
         } else {
-            $nombre_completo = "Nombre no disponible";
+            echo '<p>El grupo tutorado no está disponible.</p>';
+            $grupo_completo = "Grupo no disponible";
         }
 
-        $stmt->close();
-        $conn->close();
+    // Consulta para obtener la información del maestro
+    $query_maestro = "SELECT nombre_maestro, apaterno_maestro, amaterno_maestro FROM maestro WHERE username_maestro = ?";
+    $stmt = $conn->prepare($query_maestro);
+    $stmt->bind_param("s", $username_maestro); // Cambié "i" a "s" porque es un string
+    $stmt->execute();
+    $result_maestro = $stmt->get_result();
+
+    if ($result_maestro->num_rows === 1) {
+        $row = $result_maestro->fetch_assoc();
+        $nombre_completo = $row['nombre_maestro'] . ' ' . $row['apaterno_maestro'] . ' ' . $row['amaterno_maestro'];
+    } else {
+        $nombre_completo = "Nombre no disponible";
+    }
+
+    $stmt->close();
+    $conn->close();
     ?>
+
 </head>
 <body>
     <header>ClassCheck</header>

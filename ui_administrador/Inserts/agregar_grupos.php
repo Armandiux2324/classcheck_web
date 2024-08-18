@@ -68,7 +68,7 @@
                     <br><br><h2>Agregar grupos al sistema</h2><br>
                     <form action="/classcheck_github/php/php_admin/inserts_tablas/insert_grupos.php" method="post" enctype="multipart/form-data">
                         <p class="p_instrucciones" style="margin: 8px;">Ingrese la unidad académica:</p>
-                        <select id="selectUnidadAcademica" name="selectUnidadAcademica" class="campo-form" style="font-size: 18px; width: 300px;" onchange="fetchCarreras(this.value)">
+                        <select id="selectUnidadAcademica" name="selectUnidadAcademica" class="campo-form" style="font-size: 18px; width: 300px;" onchange="fetchCarreras(this.value)" required>
                             <option value="">Seleccione una unidad académica</option>
                             <?php
                                 if ($result_unidad_academica->num_rows > 0) {
