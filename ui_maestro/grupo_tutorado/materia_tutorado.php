@@ -104,7 +104,7 @@
                 <h3>Matrícula:</h3>
                 <p><?php echo htmlspecialchars($matricula_alumno); ?></p>
                 <p class="p_instrucciones">Pulse el botón de la materia que desee para consultar el registro</p>
-                <<?php
+                <?php
                 if ($result_materias->num_rows > 0) {
                     while ($materia = $result_materias->fetch_assoc()) {
                         $materia_id = htmlspecialchars($materia['id_materia']);

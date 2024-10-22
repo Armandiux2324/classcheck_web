@@ -1,0 +1,90 @@
+.container_calendar {
+    width: 100%;
+    max-width: 400px; /* Ajusta el ancho máximo del calendario */
+    margin: 20px auto; /* Añade un margen automático para centrarlo */
+    padding: 10px; /* Añade relleno para que no quede tan pegado al borde */
+    border: 1px solid #ccc; /* Añade un borde para definir el área del calendario */
+    border-radius: 8px; /* Redondea las esquinas del calendario */
+  }
+
+  .header_calendar{
+    width: 100%;
+            height: 45%;
+            background: linear-gradient(#000000, #0056b3);
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+  }
+  
+  .header_calendar h1 {
+    font-size: 2em; /* Ajusta el tamaño del texto del día */
+    margin-top: 5px; /* Elimina el margen */
+  }
+  
+  .header_calendar h5 {
+    font-size: 1.5em; /* Ajusta el tamaño del texto del mes */
+    margin-bottom: 8px; /* Elimina el margen */
+  }
+  
+  .body_calendar {
+    padding: 10px; /* Añade relleno para el cuerpo del calendario */
+  }
+  
+  .container_change_month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Añade espacio debajo de los controles de mes */
+    border-radius: 5px;
+  }
+  
+  .container_weedays {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px; /* Añade espacio debajo de los días de la semana */
+  }
+  
+  .container_days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Configura una cuadrícula para los días */
+    gap: 5px; /* Añade espacio entre los días */
+
+  }
+  
+  .week_days_item,
+  .week_days_item.item_day {
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    border: #000000 1px;
+  }
+  
+  .week_days_item:hover {
+    background-color: #eee; /* Cambia el fondo al pasar el mouse */
+  }
+  
+  .today {
+    background-color: #0070c9;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .today:hover {
+    background-color: #0056b3;
+  }
+  
+  #last_month{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+  }
+
+  #next_month{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+  }

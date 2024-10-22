@@ -89,7 +89,7 @@
                         ?>
                             <div>
                                 <label for="username_maestro">Nombre de usuario (Primeros 10 caracteres de la CURP):</label><br>
-                                <input type="text" id="username_maestro" class="campo-form" name="username_maestro" value="<?php echo htmlspecialchars($row['username_maestro']); ?>" pattern="[A-Z][AEIOU][A-Z][A-Z][0-9]{2}[0-9]{2}[0-9]{2}">
+                                <input type="text" id="username_maestro" class="campo-form" name="username_maestro" value="<?php echo htmlspecialchars($row['username_maestro']); ?>" pattern="[A-Z][A-Z][A-Z][A-Z][0-9]{2}[0-9]{2}[0-9]{2}">
                             </div>
                             <div>
                                 <label for="nombre_maestro">Nombre:</label><br>

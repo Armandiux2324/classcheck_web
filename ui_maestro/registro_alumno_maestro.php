@@ -7,8 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/main_style.css">
+    <link rel="stylesheet" type="text/css" href="../css/calendar_style.css">
     <script src="../scripts/main_script.js"></script>
     <script src="../scripts/maestro_script.js"></script>
+    <script src="../scripts/calendar_script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <?php
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/classcheck_github/php/php_maestro/registros_alumno.php';
@@ -64,68 +67,33 @@
                 <p><?php echo htmlspecialchars($nombre_completo_alumno); ?></p><br>
                 <h3>Matrícula:</h3>
                 <p><?php echo htmlspecialchars($matricula_alumno); ?></p>
-                <div class="calendar-container">
-                    <h2>Julio 2024</h2>
-                    <table class="calendar-table">
-                        <thead>
-                            <tr>
-                                <th>Lun</th>
-                                <th>Mar</th>
-                                <th>Mié</th>
-                                <th>Jue</th>
-                                <th>Vie</th>
-                                <th>Sáb</th>
-                                <th>Dom</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                                <td>6</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>8</td>
-                                <td>9</td>
-                                <td>10</td>
-                                <td>11</td>
-                                <td>12</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>15</td>
-                                <td>16</td>
-                                <td>17</td>
-                                <td>18</td>
-                                <td>19</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>21</td>
-                                <td>22</td>
-                                <td>23</td>
-                                <td>24</td>
-                                <td>25</td>
-                                <td>26</td>
-                                <td>27</td>
-                            </tr>
-                            <tr>
-                                <td>28</td>
-                                <td>29</td>
-                                <td>30</td>
-                                <td>31</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="container_calendar">
+                    <div class="header_calendar">
+                        <h1 id="text_day">00</h1>
+                        <h5 id="text_month">Null</h5>
+                    </div>
+                    <div class="body_calendar">
+                        <div class="container_change_month">
+                            <button id="last_month">&lt;</button>
+                            <div>
+                                <span id="text_month_02">Null</span>
+                                <span id="text_year">0000</span>
+                            </div>
+                            <button id="next_month">&gt;</button>
+                        </div>
+                        <div class="container_weedays">
+                            <span class="week_days_item">DOM</span>
+                            <span class="week_days_item">LUN</span>
+                            <span class="week_days_item">MAR</span>
+                            <span class="week_days_item">MÍE</span>
+                            <span class="week_days_item">JUE</span>
+                            <span class="week_days_item">VIE</span>
+                            <span class="week_days_item">SÁB</span>
+                        </div>
+                        <div class="container_days">
+                            <!-- Days will be generated dynamically here -->
+                        </div>
+                    </div>
                 </div>
                 <h3>Cantidad de asistencias:</h3>
                 <p><?php echo $cantidad_asistencias; ?></p><br>
