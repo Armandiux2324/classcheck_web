@@ -105,7 +105,7 @@
                             </div>
                             <div>
                                 <label for="contraseña_maestro">Contraseña:</label><br>
-                                <input type="text" id="contraseña_maestro" class="campo-form" name="password_maestro" value="<?php echo htmlspecialchars($row2['password_hash']); ?>">
+                                <input type="text" id="contraseña_maestro" class="campo-form" name="password_maestro" value="<?php echo htmlspecialchars($row2['password_hash']); ?>" pattern="[A-Z][A-Z][A-Z][A-Z][0-9]{2}[0-9]{2}[0-9]{2}">
                             </div>
                             <input type="hidden" value="<?php echo htmlspecialchars($row2['id']); ?>" name="id_user_maestro">
                             <input type="hidden" value="<?php echo htmlspecialchars($row['id_maestro']); ?>" name="id_maestro">

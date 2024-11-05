@@ -22,7 +22,7 @@
             <input type="password" class="login-input" id="password" name="password" placeholder="Contraseña" required>
             <p>Confirmar contraseña:</p>
             <input type="password" class="login-input" id="conf_password" name="conf_password" placeholder="Confirmar Contraseña" required>
-            <button type="submit" class="login-button"><strong>Confirmar</strong></button>
+            <button type="submit" class="login-button" id="verifyPass"><strong>Confirmar</strong></button>
         </form>
     </div>
     <footer>&copy; 2024 ClassCheck</footer>

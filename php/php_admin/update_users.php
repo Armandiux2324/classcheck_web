@@ -124,7 +124,9 @@ if(isset($_POST['updateAdmin'])){
                         if(!$result || !$result2){
                             die("Error en el registro: " . $conn->error);
                         }
-                        echo '<script>alert("Registro actualizado exitosamente.")</script>';
+                        else{
+                            echo '<script>alert("Registro actualizado exitosamente.")</script>';
+                        }
                     } else {
                         echo '<script>alert("Falta capturar la contraseña del administrador")</script>';
                     }

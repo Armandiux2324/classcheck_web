@@ -87,7 +87,7 @@
                 <form id="adminForm" method="post">
                     <div>
                         <label for="username_admin">Nombre de usuario:</label><br>
-                        <input type="text" id="username_admin" name="username_admin" class="campo-form" value="<?php echo htmlspecialchars($row['username_admin']); ?>" required pattern="[A-Za-zÀ-ÿ\s]+">
+                        <input type="text" id="username_admin" name="username_admin" class="campo-form" value="<?php echo htmlspecialchars($row['username_admin']); ?>" required>
                     </div>
                     <div>
                         <label for="nombre_admin">Nombre:</label><br>
